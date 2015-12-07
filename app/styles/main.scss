@@ -1,89 +1,55 @@
+$blue: rgb(0, 127, 255);
+$font-mono: 'Roboto Mono', monospaced;
+
+@import 'breakpoints';
+@import 'links';
+@import url(https://fonts.googleapis.com/css?family=Roboto+Mono:400,400italic);
 // bower:scss
 // endbower
 
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+body {
+  font-family: $font-mono;
 }
 
-body {
+h1 {
+  text-decoration: underline;
+}
+
+.row {
+  margin-bottom: 50px;
+}
+
+.progress {
+  border-bottom: 1px solid $blue;
   padding: 0;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
+.progress-bar {
+  background: $blue;
+  transition: width 1s linear;
+  text-indent: -9999px;
+  height: 10px;
 }
 
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 10px;
-
-  /* Make the masthead heading the same height as the navigation */
-  h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 40px;
-    padding-bottom: 19px;
-  }
-}
-
-/* Custom page footer */
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
-}
-
-.container-narrow > hr {
-  margin: 30px 0;
-}
-
-/* Main marketing message and sign up button */
-.jumbotron {
+.button {
   text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-
-  .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-  }
 }
 
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-
-  p + h4 {
-    margin-top: 28px;
-  }
-}
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
+// Media queries
+@media #{$mq-sm} {
   .container {
-    max-width: 730px;
+    width: 25rem;
   }
+}
 
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
+@media #{$mq-md} {
+  .container {
+    width: 30rem;
   }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
+}
+
+@media #{$mq-lg} {
+  .container {
+    width: 40rem;
   }
 }
