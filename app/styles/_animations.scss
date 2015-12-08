@@ -1,0 +1,63 @@
+// @keyframes appear {
+//   0% {
+//     opacity: 0;
+//   }
+//   50% {
+//     opacity: 0;
+//   }
+//   100% {
+//     opacity: 1;
+//   }
+// }
+
+// @keyframes disappear {
+//   0% {
+//     opacity: 1;
+//   }
+//   100% {
+//     opacity: 0;
+//   }
+// }
+
+// .animate.ng-hide-remove {
+//   animation: 2s appear;
+// }
+
+// .animate.ng-hide-add {
+//   animation: 1s disappear;
+// }
+
+// .buttons {
+//   position: relative;
+//   top: 0;
+// }
+
+// .animate {
+//   position: relative;
+//   top: 0;
+// }
+
+// ////////////
+
+.buttons {
+  position: relative;
+  overflow:hidden;
+}
+
+.animate.ng-animate {
+  transition: opacity 0.1s;
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.animate.ng-leave.ng-leave-active {
+  opacity: 0;
+}
+
+.animate.ng-enter.ng-enter-active {
+  opacity: 1;
+}
