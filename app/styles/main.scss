@@ -12,6 +12,10 @@ body {
   font-family: $font-mono;
 }
 
+.header {
+  margin-bottom: 50px;
+}
+
 h1 {
   font-size: 3rem;
   text-align: center;
@@ -46,6 +50,7 @@ h1 {
 
 .button {
   text-align: center;
+  font-size: .7rem;
 }
 
 // Media queries
@@ -59,6 +64,10 @@ h1 {
   .container {
     width: 30rem;
   }
+  .button {
+  text-align: center;
+  font-size: 1rem;
+}
 }
 
 @media #{$mq-lg} {

@@ -10,8 +10,8 @@
   </div>
 </div>
 
-<div class="buttons">
-  <div class="row between-xs animate" ng-hide="vm.playing">
+<div class="buttons" ng-switch on="vm.switchOn">
+  <div class="row between-xs animate" ng-switch-when="paused">
     <div class="button col-xs">
       <a class="link" id="pomodoro-button" href="#/" ng-click="vm.pomodore(1500000, true)">Pomodore</a>
     </div>
@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <div class="row between-xs animate" ng-show="vm.playing">
+  <div class="row between-xs animate" ng-switch-when="playing">
     <div class="button col-xs">
       <a class="link" id="pomodoro-button" href="#/" ng-click="vm.stopPomodore()">{{ vm.paused }}</a>
     </div>

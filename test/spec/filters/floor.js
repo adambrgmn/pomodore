@@ -11,7 +11,7 @@ describe('Filter: floor', function () {
     floor = $filter('floor');
   }));
 
-  it('should return the input prefixed with "floor filter:"', function () {
+  it('should return the input floored down', function () {
     var text = 1.3;
     expect(floor(text)).toBe(1);
   });

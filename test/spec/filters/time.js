@@ -11,9 +11,9 @@ describe('Filter: time', function () {
     time = $filter('time');
   }));
 
-  it('should return the input prefixed with "time filter:"', function () {
-    var text = 'angularjs';
-    expect(time(text)).toBe('time filter: ' + text);
+  it('should return the input parsed to MM:SS', function () {
+    var text = 61000;
+    expect(time(text)).toBe('01:01');
   });
 
 });

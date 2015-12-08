@@ -10,7 +10,6 @@
 angular.module('pomodoreApp')
   .controller('MainCtrl', function ($scope, $interval) {
     var vm = this;
-    var stop;
     var soundLoop = 1;
     var alarm = new Howl({
       urls: ['audio/alarm.mp3'],
@@ -27,27 +26,28 @@ angular.module('pomodoreApp')
     });
 
     vm.timer    = 0;
+    vm.stop     = undefined;
     vm.progress = 100;
     vm.playing  = false;
+    vm.switchOn = 'paused';
 
     vm.pomodore = function (value, newTimer) {
-      vm.playing = true;
+      vm.switchOn = 'playing';
       vm.paused = 'Pause';
 
-      if (angular.isDefined(stop)) { return; }
+      if (angular.isDefined(vm.stop)) { return; }
 
       if (newTimer || vm.timer === 0) {
         vm.timer = value;
         vm.part = 100/(value/1000);
       }
 
-      stop = $interval(function () {
+      vm.stop = $interval(function () {
         if (vm.timer > 0) {
           vm.progress -= vm.part;
           vm.timer -= 1000;
         } else {
           alarm.play();
-          window.navigator.vibrate(200);
           vm.stopPomodore();
           vm.resetPomodore();
         }
@@ -55,10 +55,10 @@ angular.module('pomodoreApp')
     };
 
     vm.stopPomodore = function () {
-      if (angular.isDefined(stop)) {
-        $interval.cancel(stop);
+      if (angular.isDefined(vm.stop)) {
+        $interval.cancel(vm.stop);
         vm.paused = 'Resume';
-        stop = undefined;
+        vm.stop = undefined;
       } else {
         vm.pomodore(0, false);
       }
@@ -67,7 +67,7 @@ angular.module('pomodoreApp')
     vm.resetPomodore = function () {
       vm.timer = 0;
       vm.progress = 100;
-      vm.playing = false;
+      vm.switchOn = 'paused';
     };
 
     $scope.$on('$destroy', function () {
