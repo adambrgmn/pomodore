@@ -3,6 +3,7 @@ $font-mono: 'Roboto Mono', monospaced;
 
 @import 'breakpoints';
 @import 'links';
+@import 'animations';
 @import url(https://fonts.googleapis.com/css?family=Roboto+Mono:400,400italic);
 // bower:scss
 // endbower
@@ -12,11 +13,18 @@ body {
 }
 
 h1 {
+  font-size: 3rem;
+  text-align: center;
   text-decoration: underline;
+  margin-bottom: 50px;
 }
 
 .row {
   margin-bottom: 50px;
+}
+
+.counter {
+  font-size: 2rem;
 }
 
 .progress {
@@ -29,6 +37,11 @@ h1 {
   transition: width 1s linear;
   text-indent: -9999px;
   height: 10px;
+}
+
+.buttons .row {
+  position: abolute;
+  top: 0;
 }
 
 .button {

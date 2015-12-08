@@ -10,23 +10,25 @@
   </div>
 </div>
 
-<div class="buttons row between-xs" ng-hide="vm.playing">
-  <div class="button col-xs-4">
-    <a class="link" id="pomodoro-button" href="#/" ng-click="vm.pomodore(5000, true)">Pomodore</a>
+<div class="buttons">
+  <div class="row between-xs animate" ng-hide="vm.playing">
+    <div class="button col-xs">
+      <a class="link" id="pomodoro-button" href="#/" ng-click="vm.pomodore(1500000, true)">Pomodore</a>
+    </div>
+    <div class="button col-xs">
+      <a class="link" id="short-break-button" href="#/" ng-click="vm.pomodore(300000, true)">Short break</a>
+    </div>
+    <div class="button col-xs">
+      <a class="link" id="short-break-button" href="#/" ng-click="vm.pomodore(900000, true)">Long break</a>
+    </div>
   </div>
-  <div class="button col-xs-4">
-    <a class="link" id="short-break-button" href="#/" ng-click="vm.pomodore(300000, true)">Short break</a>
-  </div>
-  <div class="button col-xs-4">
-    <a class="link" id="short-break-button" href="#/" ng-click="vm.pomodore(900000, true)">Long break</a>
-  </div>
-</div>
 
-<div class="buttons row between-xs" ng-show="vm.playing">
-  <div class="button col-xs-6">
-    <a class="link" id="pomodoro-button" href="#/" ng-click="vm.stopPomodore()">{{ vm.paused }}</a>
-  </div>
-  <div class="button col-xs-6">
-    <a class="link" id="pomodoro-button" href="#/" ng-click="vm.resetPomodore()">Reset</a>
+  <div class="row between-xs animate" ng-show="vm.playing">
+    <div class="button col-xs">
+      <a class="link" id="pomodoro-button" href="#/" ng-click="vm.stopPomodore()">{{ vm.paused }}</a>
+    </div>
+    <div class="button col-xs">
+      <a class="link" id="pomodoro-button" href="#/" ng-click="vm.resetPomodore()">Reset</a>
+    </div>
   </div>
 </div>

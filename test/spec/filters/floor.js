@@ -12,8 +12,8 @@ describe('Filter: floor', function () {
   }));
 
   it('should return the input prefixed with "floor filter:"', function () {
-    var text = 'angularjs';
-    expect(floor(text)).toBe('floor filter: ' + text);
+    var text = 1.3;
+    expect(floor(text)).toBe(1);
   });
 
 });

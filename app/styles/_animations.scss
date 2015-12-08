@@ -1,0 +1,35 @@
+// .animate {
+//   transition: all linear 0.5s;
+// }
+
+.animate.ng-hide-add {
+  animation: 1s hide;
+}
+
+.animate.ng-hide-remove {
+  animation: 1s show;
+}
+
+@keyframes hide {
+  0% {
+    opacity: 1;
+  }
+  49% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  51% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

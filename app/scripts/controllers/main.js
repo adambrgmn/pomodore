@@ -11,7 +11,7 @@ angular.module('pomodoreApp')
   .controller('MainCtrl', function ($scope, $interval) {
     var vm = this;
     var stop;
-    var soundLoop = 2;
+    var soundLoop = 1;
     var alarm = new Howl({
       urls: ['audio/alarm.mp3'],
       autoplay: false,
@@ -26,10 +26,9 @@ angular.module('pomodoreApp')
       }
     });
 
-    vm.timer = 0;
-    vm.playing = false;
-    vm.paused = false;
+    vm.timer    = 0;
     vm.progress = 100;
+    vm.playing  = false;
 
     vm.pomodore = function (value, newTimer) {
       vm.playing = true;
@@ -48,6 +47,7 @@ angular.module('pomodoreApp')
           vm.timer -= 1000;
         } else {
           alarm.play();
+          window.navigator.vibrate(200);
           vm.stopPomodore();
           vm.resetPomodore();
         }
