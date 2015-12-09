@@ -1,0 +1,34 @@
+<div class="row center-xs">
+  <div class="counter col-xs-12">
+    {{ vm.timer | time }}
+  </div>
+</div>
+
+<div class="row center-xs">
+  <div class="progress col-xs-12">
+    <div class="progress-bar" style="width: {{ vm.progress | floor }}%">%</div>
+  </div>
+</div>
+
+<div class="buttons">
+  <div class="row around-xs animate" ng-show="!vm.playing">
+    <div class="button">
+      <a class="link" ng-click="vm.playPomodore(true, 10000)">Pomodore</a>
+    </div>
+    <div class="button">
+      <a class="link" ng-click="vm.playPomodore(true, 300000)">Short break</a>
+    </div>
+    <div class="button">
+      <a class="link" ng-click="vm.playPomodore(true, 900000)">Long break</a>
+    </div>
+  </div>
+
+  <div class="row around-xs animate" ng-show="vm.playing">
+    <div class="button">
+      <a class="link" id="pomodoro-button" ng-click="vm.pausePomodore()">{{ vm.pauseResume }}</a>
+    </div>
+    <div class="button">
+      <a class="link" id="pomodoro-button" ng-click="vm.resetPomodore()">Reset</a>
+    </div>
+  </div>
+</div>

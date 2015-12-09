@@ -1,3 +1,12 @@
+a {
+  color: $black;
+  text-decoration: none;
+  &:hover, &:focus {
+    color: $blue;
+    text-decoration: underline;
+  }
+}
+
 .button {
   position: relative;
   z-index: 1; /* needed for setting pseudo-element z-index */
@@ -16,6 +25,7 @@
   padding: 0 5px;
   overflow: hidden;
   transition: color 0.5s;
+  cursor: pointer;
 }
 
 .button a::before,
