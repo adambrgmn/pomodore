@@ -1,12 +1,5 @@
-# pomodore
+# Pomodore
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.14.0.
+A simple and beautiful tomato timer.
 
-## Build & development
-
-Run `grunt` for building and `grunt serve` for preview.
-
-## Testing
-
-Running `grunt test` will run the unit tests with karma.
+Feel free to copy or steal as much as you like! And if you improve it, tell me!
