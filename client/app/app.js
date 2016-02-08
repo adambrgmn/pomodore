@@ -5,13 +5,11 @@ angular.module('pomodoreApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ui.router'
 ])
-  .config(function($routeProvider, $locationProvider) {
-    $routeProvider
-      .otherwise({
-        redirectTo: '/'
-      });
+  .config(function($urlRouterProvider, $locationProvider) {
+    $urlRouterProvider
+      .otherwise('/');
 
     $locationProvider.html5Mode(true);
   });

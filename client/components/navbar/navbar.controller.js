@@ -4,19 +4,14 @@ class NavbarController {
   //start-non-standard
   menu = [{
     'title': 'Home',
-    'link': '/'
+    'state': 'main'
   }];
 
   isCollapsed = true;
   //end-non-standard
 
-  constructor($location) {
-    this.$location = $location;
+  constructor() {
     }
-
-  isActive(route) {
-    return route === this.$location.path();
-  }
 }
 
 angular.module('pomodoreApp')

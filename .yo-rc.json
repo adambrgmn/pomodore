@@ -16,9 +16,9 @@
     "filters": {
       "js": true,
       "babel": true,
-      "jade": true,
+      "html": true,
       "sass": true,
-      "ngroute": true,
+      "uirouter": true,
       "bootstrap": false,
       "uibootstrap": false,
       "noModels": true,
@@ -37,14 +37,14 @@
     "basePath": "client",
     "moduleName": "",
     "filters": [
-      "ngroute",
+      "uirouter",
       "jasmine",
-      "ngroute"
+      "uirouter"
     ],
     "extensions": [
       "babel",
       "js",
-      "jade",
+      "html",
       "scss"
     ],
     "directiveSimpleTemplates": "",
