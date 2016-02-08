@@ -1,27 +1,29 @@
-.thing-form {
-  margin: 20px 0;
-}
-
-#banner {
-  border-bottom: none;
-  margin-top: -20px;
-}
-
-#banner h1 {
-  font-size: 60px;
-  line-height: 1;
-  letter-spacing: -1px;
-}
-
-.hero-unit {
-  position: relative;
-  padding: 30px 15px;
-  color: #F5F5F5;
+.counter {
+  margin: 1rem 0;
+  width: 100%;
+  font-size: 2rem;
   text-align: center;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-  background: #4393B9;
 }
 
-.navbar-text {
-  margin-left: 15px;
+.counter-progress-bar-container {
+  margin: 1rem 0;
+  width: 100%;
+  border-bottom: 1px solid blue;
+}
+
+.counter-progress-bar {
+  height: 8px;
+  background: blue;
+  transition: width 1s linear;
+}
+
+.buttons {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.start-buttons, .pause-buttons {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
 }

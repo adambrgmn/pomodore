@@ -474,9 +474,8 @@ gulp.task('build:client', ['transpile:client', 'styles', 'html', 'constant'], ()
                 .pipe(plugins.uglify())
             .pipe(jsFilter.restore())
             .pipe(cssFilter)
-                .pipe(plugins.minifyCss({
-                    cache: true,
-                    processImportFrom: ['!fonts.googleapis.com']
+                .pipe(plugins.cssnano({
+                    styleCache: true
                 }))
             .pipe(cssFilter.restore())
             .pipe(htmlBlock)
