@@ -5,7 +5,8 @@ angular.module('pomodoreApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ui.router'
+  'ui.router',
+  'ngAnimate'
 ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider

@@ -7,17 +7,20 @@
  * The MainController controls the interval in the pomodore app
  * @param {function} $interval The interval component
  */
-function MainController ($interval) {
+function MainController ($interval, $timeout) {
   var vm = this;
-  var interval, counter, repeats, paused;
+  var interval, counter, repeats;
 
   // Models
-  vm.playing  = false;
-  vm.counter  = 0;
-  vm.progress = 100;
-  vm.start    = start;
-  vm.pause    = pause;
-  vm.stop     = stop;
+  vm.playing    = false;
+  vm.paused     = false;
+  vm.showPause  = true;
+  vm.showResume = false;
+  vm.counter    = 0;
+  vm.progress   = 100;
+  vm.start      = start;
+  vm.pause      = pause;
+  vm.stop       = stop;
 
 
   // Methods
@@ -36,7 +39,7 @@ function MainController ($interval) {
       vm.progress = 100;              // Set progress to 100 percent
     }
 
-    paused = false;    // In this case the interval is running
+    vm.paused = false; // In this case the interval is running
     vm.playing = true; // Set playing = true
 
     // Starts or resumes the interval
@@ -56,11 +59,24 @@ function MainController ($interval) {
    * Pause or resume the running interval
    */
   function pause () {
-    if (paused) {
+    var delay = 199;
+    if (vm.paused) {
       start(false);               // Resume the "old" interval
     } else {
       $interval.cancel(interval); // Pause the interval
-      paused = true;              // Set paused = true
+      vm.paused = true;           // Set vm.paused = true
+    }
+
+    if (vm.showPause) {
+      vm.showPause = false;
+      $timeout(function () {
+        vm.showResume = true;
+      }, delay)
+    } else {
+      vm.showResume = false;
+      $timeout(function () {
+        vm.showPause = true;
+      }, delay)
     }
   }
 

@@ -6,14 +6,17 @@
     </div>
   </div>
   <div class="buttons">
-    <div class="start-buttons" ng-show="!main.playing">
-      <button class="btn-start" ng-click="main.start(true, 25)">Pomodore</button>
-      <button class="btn-start" ng-click="main.start(true, 1)">Short break</button>
-      <button class="btn-start" ng-click="main.start(true, 15)">Long break</button>
+    <div class="button-group buttons-start" ng-show="!main.playing">
+      <a href="#" class="btn btn-start" ng-click="main.start(true, 25)">Pomodore</a>
+      <a href="#" class="btn btn-start" ng-click="main.start(true, 5)">Short break</a>
+      <a href="#" class="btn btn-start" ng-click="main.start(true, 15)">Long break</a>
     </div>
-    <div class="pause-buttons" ng-show="main.playing">
-      <button class="btn-pause" ng-click="main.pause()">Pause</button>
-      <button class="btn-pause" ng-click="main.stop()">Stop</button>
+    <div class="button-group buttons-pause" ng-show="main.playing">
+      <a href="#" class="btn btn-pause" ng-class="{'active': main.paused}" ng-click="main.pause()">
+        <span class="btn-span" ng-show="main.showPause">Pause</span>
+        <span class="btn-span" ng-show="main.showResume">Resume</span>
+      </a>
+      <a href="#" class="btn btn-pause" ng-click="main.stop()">Stop</a>
     </div>
   </div>
 </div>
