@@ -24,6 +24,7 @@ $h1-map: (
 );
 
 $black: rgb(15, 15, 15);
+$grey: rgb(240, 240, 240);
 $blue: rgb(0, 10, 255);
 
 
@@ -32,13 +33,21 @@ $blue: rgb(0, 10, 255);
   box-sizing: border-box;
 }
 
+a {
+  color: $black;
+  &:hover {
+    color: $blue;
+  }
+}
+
 html {
   font-family: 'Roboto Mono', monospace;
   @include typi-base();
 }
 
 body {
-  padding-bottom: 150px;
+  padding-bottom: 100px;
+  background: $grey;
 }
 
 .container {
@@ -66,13 +75,19 @@ p {
 }
 
 .info {
-  margin: 2rem auto 4rem auto;
+  margin: 2rem auto;
   padding: 0 15px;
+  border-top: 1px solid $black;
 }
 
 .info p {
-  margin: 1rem 0 0 0;
+  margin: 1rem 0;
   width: 100%;
+}
+
+.button-hide {
+  align-self: flex-start;
+  margin-top: 1rem;
 }
 
 // Component styles are injected through gulp

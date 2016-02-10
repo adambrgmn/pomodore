@@ -71,12 +71,12 @@ function MainController ($interval, $timeout) {
       vm.showPause = false;
       $timeout(function () {
         vm.showResume = true;
-      }, delay)
+      }, delay);
     } else {
       vm.showResume = false;
       $timeout(function () {
         vm.showPause = true;
-      }, delay)
+      }, delay);
     }
   }
 
