@@ -541,6 +541,7 @@ gulp.task('copy:assets', () => {
 gulp.task('copy:server', () => {
     return gulp.src([
         'package.json',
+        'ecosystem.json',
         'bower.json',
         '.bowerrc'
     ], {cwdbase: true})
