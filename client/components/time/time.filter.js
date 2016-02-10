@@ -14,6 +14,11 @@ angular.module('pomodoreApp')
         sec = '0' + sec;
       }
 
+      if (min === '00' && sec === '00') {
+        min = '--';
+        sec = '--';
+      }
+
       return min + ':' + sec;
     };
   });
