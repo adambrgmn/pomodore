@@ -24,8 +24,9 @@ describe('Controller: MainController', function() {
     });
   }));
 
-  it('should attach a list of things to the controller', function() {
-    $httpBackend.flush();
-    expect(MainController.awesomeThings.length).toBe(4);
+  it('should play a timer when running fn start()', function() {
+    expect(MainController.playing).toBe(false);
+    MainController.start(true, 1);
+    expect(MainController.playing).toBe(true);
   });
 });

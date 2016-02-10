@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Filter: time', function () {
+describe('Filter: timeFilter', function () {
 
   // load the filter's module
   beforeEach(module('pomodoreApp'));
@@ -8,12 +8,12 @@ describe('Filter: time', function () {
   // initialize a new instance of the filter before each test
   var time;
   beforeEach(inject(function ($filter) {
-    time = $filter('time');
+    time = $filter('timeFilter');
   }));
 
   it('should return the input parsed to "minutes:seconds" (padded if less than 10)', function () {
-    var time = 61000;
-    expect(time(time)).toBe('01:01');
+    var milliseconds = 61000;
+    expect(time(milliseconds)).toBe('01:01');
   });
 
 });
