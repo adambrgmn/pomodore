@@ -7,7 +7,7 @@
  * The MainController controls the interval in the pomodore app
  * @param {function} $interval The interval component
  */
-function MainController ($interval, $timeout) {
+function MainController ($interval, $timeout, playSound) {
   var vm = this;
   var interval, counter, repeats;
 
@@ -101,6 +101,7 @@ function MainController ($interval, $timeout) {
    */
   function finished () {
     $interval.cancel(interval); // Stop running interval
+    playSound.alert();
     vm.playing  = false; // Reset playing
     vm.counter  = 0;     // Reset counter
     vm.progress = 100;     // Reset progress
