@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="counter">
+    <div class="counter-time">{{ main.counter | timeFilter }}</div>
+    <div class="counter-progress-bar-container">
+      <div class="counter-progress-bar" style="width: {{main.progress}}%"></div>
+    </div>
+  </div>
+  <div class="buttons">
+    <div class="button-group buttons-start" ng-show="!main.playing">
+      <a href="#" class="btn btn-start" ng-click="main.start(true, 25)">Pomodore</a>
+      <a href="#" class="btn btn-start" ng-click="main.start(true, 0.1)">Short break</a>
+      <a href="#" class="btn btn-start" ng-click="main.start(true, 15)">Long break</a>
+    </div>
+    <div class="button-group buttons-pause" ng-show="main.playing">
+      <a href="#" class="btn btn-pause" ng-class="{'active': main.paused}" ng-click="main.pause()">
+        <span class="btn-span" ng-show="main.showPause">Pause</span>
+        <span class="btn-span" ng-show="main.showResume">Resume</span>
+      </a>
+      <a href="#" class="btn btn-pause" ng-click="main.stop()">Stop</a>
+    </div>
+  </div>
+</div>
