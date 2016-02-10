@@ -9,13 +9,13 @@ angular.module('pomodoreApp')
           loop: 3
         }
       ],
-      path: 'audio/',
+      path: 'assets/audio/',
       preload: true,
     });
 
     // Public API here
     return {
-      playAlert: function () {
+      alert: function () {
         return ion.sound.play('alarm');
       }
     };
