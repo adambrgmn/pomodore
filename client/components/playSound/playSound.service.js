@@ -2,15 +2,21 @@
 
 angular.module('pomodoreApp')
   .factory('playSound', function () {
-    // Service logic
-    // ...
-
-    var meaningOfLife = 42;
+    ion.sound({
+      sounds: [
+        {
+          name: 'alarm',
+          loop: 3
+        }
+      ],
+      path: 'audio/',
+      preload: true,
+    });
 
     // Public API here
     return {
-      someMethod: function () {
-        return meaningOfLife;
+      playAlert: function () {
+        return ion.sound.play('alarm');
       }
     };
   });
