@@ -21,27 +21,25 @@
    */
   "deploy": {
     "production": {
-      "user": "node",
+      "user": "adam",
       "host": "...",
       "ref" : "origin/master",
       "repo": "https://github.com/adambrgmn/pomodore.git",
       "path": "/var/www/production",
       "post-deploy": "npm install ; gulp build ; cd dist ; npm install --production ; pm2 startOrRestart ecosystem.json --env production",
       "env": {
-        "NODE_ENV": "production",
-        "port": 3000
+        "NODE_ENV": "production"
       }
     },
     "dev": {
-      "user": "node",
+      "user": "adam",
       "host": "...",
       "ref" : "origin/develop",
       "repo": "https://github.com/adambrgmn/pomodore.git",
       "path": "/var/www/development",
       "post-deploy": "npm install ; pm2 startOrRestart ecosystem.json --env dev",
       "env": {
-        "NODE_ENV": "development",
-        "port": 4000
+        "NODE_ENV": "development"
       }
     }
   }
