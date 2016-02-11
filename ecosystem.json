@@ -22,7 +22,7 @@
   "deploy": {
     "production": {
       "user": "adam",
-      "host": "...",
+      "host": "82.196.7.65",
       "ref" : "origin/master",
       "repo": "https://github.com/adambrgmn/pomodore.git",
       "path": "/var/www/production",
@@ -33,7 +33,7 @@
     },
     "dev": {
       "user": "adam",
-      "host": "...",
+      "host": "82.196.7.65",
       "ref" : "origin/develop",
       "repo": "https://github.com/adambrgmn/pomodore.git",
       "path": "/var/www/development",
