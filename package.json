@@ -1,6 +1,6 @@
 {
   "name": "pomodore",
-  "version": "0.1.0",
+  "version": "2.1.0",
   "devDependencies": {
     "apidoc": "^0.14.0",
     "del": "^2.2.0",
