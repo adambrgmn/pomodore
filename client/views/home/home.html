@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="counter">
+    <div class="counter-time">{{ vm.counter | timeFilter }}</div>
+    <div class="counter-progress-bar-container">
+      <div class="counter-progress-bar" style="width: {{vm.progress}}%"></div>
+    </div>
+  </div>
+  <div class="buttons">
+    <div class="button-group buttons-start" ng-show="!vm.playing">
+      <a href="#" class="btn btn-start" ng-click="vm.start(true, 25)">Pomodore</a>
+      <a href="#" class="btn btn-start" ng-click="vm.start(true, 5)">Short break</a>
+      <a href="#" class="btn btn-start" ng-click="vm.start(true, 15)">Long break</a>
+    </div>
+    <div class="button-group buttons-pause" ng-show="vm.playing">
+      <a href="#" class="btn btn-pause" ng-class="{'active': vm.paused}" ng-click="vm.pause()">
+        <span class="btn-span" ng-show="vm.showPause">Pause</span>
+        <span class="btn-span" ng-show="vm.showResume">Resume</span>
+      </a>
+      <a href="#" class="btn btn-pause" ng-click="vm.stop()">Stop</a>
+    </div>
+  </div>
+</div>

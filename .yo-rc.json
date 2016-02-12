@@ -1,60 +1,15 @@
 {
-  "generator-angular-fullstack": {
-    "generatorVersion": "3.3.0",
-    "endpointDirectory": "server/api/",
-    "insertRoutes": true,
-    "registerRoutesFile": "server/routes.js",
-    "routesNeedle": "// Insert routes below",
-    "routesBase": "/api/",
-    "pluralizeRoutes": true,
-    "insertSockets": true,
-    "registerSocketsFile": "server/config/socketio.js",
-    "socketsNeedle": "// Insert sockets below",
-    "insertModels": true,
-    "registerModelsFile": "server/sqldb/index.js",
-    "modelsNeedle": "// Insert models below",
+  "generator-bangular": {
+    "version": "0.12.1",
     "filters": {
-      "js": true,
-      "babel": true,
-      "html": true,
-      "sass": true,
-      "uirouter": true,
-      "bootstrap": false,
-      "uibootstrap": false,
-      "noModels": true,
-      "gulp": true,
-      "jasmine": true,
-      "mocha": false,
-      "should": false,
-      "expect": false
+      "backend": "json",
+      "reload": "browsersync",
+      "ngCookies": true,
+      "ngResource": true,
+      "ngAnimate": true,
+      "control": true,
+      "karma": true,
+      "hasTests": true
     }
-  },
-  "generator-ng-component": {
-    "routeDirectory": "client/app/",
-    "directiveDirectory": "client/app/",
-    "filterDirectory": "client/app/",
-    "serviceDirectory": "client/app/",
-    "basePath": "client",
-    "moduleName": "",
-    "filters": [
-      "uirouter",
-      "jasmine",
-      "uirouter"
-    ],
-    "extensions": [
-      "babel",
-      "js",
-      "html",
-      "scss"
-    ],
-    "directiveSimpleTemplates": "",
-    "directiveComplexTemplates": "",
-    "filterTemplates": "",
-    "serviceTemplates": "",
-    "factoryTemplates": "",
-    "controllerTemplates": "",
-    "decoratorTemplates": "",
-    "providerTemplates": "",
-    "routeTemplates": ""
   }
 }

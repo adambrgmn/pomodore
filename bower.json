@@ -1,24 +1,19 @@
 {
   "name": "pomodore",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "dependencies": {
-    "angular": "~1.4.0",
-    "json3": "~3.3.1",
-    "es5-shim": "~3.0.1",
-    "angular-resource": "~1.4.0",
-    "angular-cookies": "~1.4.0",
-    "angular-sanitize": "~1.4.0",
-    "angular-animate": "~1.4.0",
-    "font-awesome": ">=4.1.0",
-    "lodash": "~2.4.1",
-    "angular-ui-router": "~0.2.15",
-    "typi": "^1.1.0",
+    "angular": "~1.5.0",
+    "angular-route": "~1.5.0",
+    "angular-cookies": "~1.5.0",
+    "angular-resource": "~1.5.0",
+    "angular-animate": "~1.5.0",
     "normalize-css": "normalize.css#^3.0.3",
-    "animate.css": "^3.5.1",
+    "typi": "^1.1.0",
     "jquery": "^2.2.0",
     "ion-sound": "ionsound#^3.0.6"
   },
   "devDependencies": {
-    "angular-mocks": "~1.4.0"
+    "angular-mocks": "~1.5.0",
+    "angular-scenario": "~1.5.0"
   }
 }
