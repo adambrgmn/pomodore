@@ -47,7 +47,7 @@ gulp.task('clean:finish', function (done) {
 });
 
 gulp.task('copy:dist', function () {
-  var main = gulp.src(['server/**/*', 'package.json'], { base: './' });
+  var main = gulp.src(['server/**/*', 'package.json', 'ecosystem.json'], { base: './' });
   var assets = gulp.src('client/assets/**/*', { base: './' });
 
   return sq({ objectMode: true }, main, assets)
