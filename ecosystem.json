@@ -39,11 +39,7 @@
       "ref": "origin/develop",
       "repo": "https://github.com/adambrgmn/pomodore.git",
       "path": "/var/www/dev/pomodore.fransvilhelm.com",
-<<<<<<< HEAD
       "post-deploy": "npm install && bower install ; pm2 startOrRestart ecosystem.json --env development",
-=======
-      "post-deploy": "npm install ; pm2 startOrRestart ecosystem.json --env development",
->>>>>>> hotfix/2.1.3
       "env": {
         "NODE_ENV": "development"
       }
