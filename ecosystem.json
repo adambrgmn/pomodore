@@ -24,7 +24,7 @@
   "deploy": {
     "production": {
       "user": "adam",
-      "host": "212.83.163.1",
+      "host": "188.166.0.53",
       "ref": "origin/master",
       "repo": "https://github.com/adambrgmn/pomodore-dist.git",
       "path": "/var/www/prod/pomodore.fransvilhelm.com",
@@ -35,11 +35,11 @@
     },
     "development": {
       "user": "adam",
-      "host": "212.83.163.1",
+      "host": "188.166.0.53",
       "ref": "origin/develop",
       "repo": "https://github.com/adambrgmn/pomodore.git",
       "path": "/var/www/dev/pomodore.fransvilhelm.com",
-      "post-deploy": "npm install ; pm2 startOrRestart ecosystem.json --env development",
+      "post-deploy": "npm install && bower install ; pm2 startOrRestart ecosystem.json --env development",
       "env": {
         "NODE_ENV": "development"
       }

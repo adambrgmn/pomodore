@@ -56,6 +56,8 @@
   },
   "scripts": {
     "start": "node server/server.js",
-    "test": "gulp test"
+    "test": "gulp test",
+    "deploy": "pm2 deploy ecosystem.json production",
+    "deploy:setup": "pm2 deploy ecosystem.json production setup"
   }
 }
