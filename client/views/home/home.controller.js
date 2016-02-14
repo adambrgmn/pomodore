@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pomodore')
-  .controller('HomeCtrl', function ($interval, $timeout, PlaySound) {
+  .controller('HomeCtrl', function ($interval, $timeout, PlaySound, Analytics) {
     var vm = this;
     var interval, counter, repeats;
 
@@ -31,6 +31,7 @@ angular.module('pomodore')
         counter     = time * 60 * 1000; // Translate minutes to millisconds
         vm.counter  = counter;          // Set the counter to toight amount of minutes
         vm.progress = 100;              // Set progress to 100 percent
+        track(time);
       }
 
       vm.paused = false; // In this case the interval is running
@@ -99,5 +100,16 @@ angular.module('pomodore')
       vm.playing  = false; // Reset playing
       vm.counter  = 0;     // Reset counter
       vm.progress = 100;     // Reset progress
+      Analytics.trackEvent('timer', 'finished', 'Pomodore');
+    }
+
+    function track (time) {
+      if (time === 25) {
+        Analytics.trackEvent('timer', 'pomodore', 'Pomodore');
+      } else if (time === 15) {
+        Analytics.trackEvent('timer', 'long', 'Long break');
+      } else if (time === 5) {
+        Analytics.trackEvent('timer', 'short', 'Short Break');
+      }
     }
   });
