@@ -4,9 +4,10 @@ angular.module('pomodore', [
   'ngRoute',
   'ngCookies',
   'ngResource',
-  'ngAnimate'
+  'ngAnimate',
+  'angular-google-analytics'
 ])
-  .config(function ($routeProvider, $locationProvider) {
+  .config(function ($routeProvider, $locationProvider, AnalyticsProvider) {
 
     $routeProvider
       .otherwise({
@@ -14,5 +15,7 @@ angular.module('pomodore', [
       });
 
     $locationProvider.html5Mode(true);
+
+    AnalyticsProvider.setAccount('UA-71140948-1');
 
   });
