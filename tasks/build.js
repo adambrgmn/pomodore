@@ -104,7 +104,7 @@ gulp.task('rev', function () {
     }
   });
 
-  return gulp.src('dist/client/**')
+  return gulp.src(['dist/client/**', '!./**/*.mp3'])
     .pipe(rev.revision())
     .pipe(gulp.dest('dist/client/'));
 });
