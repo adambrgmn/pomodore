@@ -1,5 +1,5 @@
 # Pomodore
-## v2.1.8
+## v2.1.9
 
 A small but beautiful tomato-timer.
 
