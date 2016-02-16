@@ -27,10 +27,11 @@
 
     <!-- Facebook -->
     <meta property="og:url"         content="http://pomodore.fransvilhelm.com/">
-    <meta property="og:type"        content="product">
+    <meta property="og:site_name"   content="Pomodore">
     <meta property="og:title"       content="Pomodore - A simple tomato timer">
     <meta property="og:description" content="Pomodore is a small, simple and – if I may say so – beautiful tomato timer. The usage is pretty straightforward: Just start a new pomodore and work until you hear the bell. Then take a small break, stretch your legs and grab a cup of coffee. And every once in a while you may take a longer break and contemplate over the meaning of life.">
     <meta property="og:image"       content="http://pomodore.fransvilhelm.com/assets/images/facebook.png">
+    <meta property="fb:app_id"      content="1528042234158058">
 
     <link href='https://fonts.googleapis.com/css?family=Roboto+Mono:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
     <!-- build:css app.css -->
@@ -45,6 +46,24 @@
 
   </head>
   <body>
+
+    <script>
+      window.fbAsyncInit = function () {
+        FB.init({
+          appId: '1528042234158058',
+          xfbml: true,
+          version: 'v2.5'
+        });
+      };
+
+      (function (d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
 
     <header class="header container" id="header">
       <h1 class="header-title">Pomodore</h1>
@@ -61,7 +80,9 @@
         <p>
           <strong>Pomodore:</strong> 25 minutes<br>
           <strong>Short break:</strong> 5 minutes<br>
-          <strong>Long break:</strong> 15 minutes</p>
+          <strong>Long break:</strong> 15 minutes
+        </p>
+        <p><a href="https://www.facebook.com/dialog/share?app_id=1528042234158058&amp;display=popup&amp;href=http%3A%2F%2Fpomodore.fransvilhelm.com&amp;redirect_uri=http%3A%2F%2Fpomodore.fransvilhelm.com">Share on Facebook!</a></p>
       </div>
       <a href="#" class="button-hide">Hide info</a>
     </div>
