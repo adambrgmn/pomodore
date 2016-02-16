@@ -6,10 +6,11 @@ module.exports = function (app) {
 
   // API
 
-  app.route('/:url(api|app|bower_components|assets)/*')
+  app.route('/:url(api|app|bower_components)/*')
     .get(function (req, res) {
       res.status(404).end();
     });
+
 
   app.route('/*')
     .get(function (req, res) {
