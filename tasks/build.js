@@ -104,7 +104,7 @@ gulp.task('rev', function () {
     }
   });
 
-  return gulp.src(['dist/client/**', '!./**/*.mp3'])
+  return gulp.src(['dist/client/**', '!./**/*.mp3', '!./**/facebook.png'])
     .pipe(rev.revision())
     .pipe(gulp.dest('dist/client/'));
 });
