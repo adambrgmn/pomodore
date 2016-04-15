@@ -1,8 +1,7 @@
 import React from 'react';
 import {
   renderIntoDocument,
-  scryRenderedDOMComponentsWithTag,
-  Simulate,
+  scryRenderedDOMComponentsWithClass,
 } from 'react-addons-test-utils';
 import { expect } from 'chai';
 
@@ -11,8 +10,8 @@ import App from './App';
 describe('App', () => {
   it('should render an app', () => {
     const component = renderIntoDocument(<App />);
-    const header = scryRenderedDOMComponentsWithTag(component, 'h1');
+    const nodeTree = scryRenderedDOMComponentsWithClass(component, 'container');
 
-    expect(header.length).to.equal(1);
+    expect(nodeTree.length).to.equal(1);
   });
 });

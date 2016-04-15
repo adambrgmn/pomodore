@@ -1,11 +1,10 @@
-'use strict';
-
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const StatsPlugin = require('stats-webpack-plugin');
 const merge = require('webpack-merge');
+const pkg = require('./package.json');
 
 const TARGET = process.env.npm_lifecycle_event;
 const PATHS = {
@@ -34,11 +33,18 @@ const common = {
     new HtmlWebpackPlugin({
       template: './assets/templates/index.jade',
       inject: false,
-      title: 'Pomodore',
       appMountId: 'app',
       filename: 'index.html',
+      // Options
+      title: 'Pomodore',
+      tagline: 'A simple tomato timer',
+      version: pkg.version,
     }),
     new webpack.optimize.OccurenceOrderPlugin(),
+  ],
+  postcss: [
+    require('autoprefixer'),
+    require('precss'),
   ],
 };
 
@@ -73,7 +79,7 @@ if (TARGET === 'start' || !TARGET) {
         },
         {
           test: /\.css$/,
-          loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]',
+          loader: 'style!css?modules&importLoaders=1&localIdentName=[name]---[local]---[hash:base64:5]!postcss',
         },
       ],
     },
@@ -104,11 +110,11 @@ if (TARGET === 'build') {
     },
     module: {
       loaders: [{
-        test: /\.js?$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel',
         query: {
-          presets: ['es2015', 'stage-0', 'react'],
+          presets: ['react', 'es2015', 'stage-0'],
         },
       }, {
         test: /\.json?$/,
@@ -117,12 +123,9 @@ if (TARGET === 'build') {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract(
           'style',
-          'css?modules&localIdentName=[name]---[local]---[hash:base64:5]!postcss'
+          'css?modules&importLoaders=1&localIdentName=[name]---[local]---[hash:base64:5]!postcss'
         ),
       }],
     },
-    postcss: [
-      require('autoprefixer'),
-    ],
   });
 }

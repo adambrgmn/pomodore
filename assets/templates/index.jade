@@ -8,12 +8,21 @@ doctype html
 html(lang="en", class="", manifest=manifest)
   <!--<![endif]-->
   head
-    title= htmlWebpackPlugin.options.title
+    title
+      | #{htmlWebpackPlugin.options.title} | #{htmlWebpackPlugin.options.tagline}
     each file, index in htmlWebpackPlugin.files.css
       link(href=file, rel="stylesheet")
   body
+    header.header.container#header
+      h1 #{htmlWebpackPlugin.options.title}
+      p #{htmlWebpackPlugin.options.tagline}
+
     if (htmlWebpackPlugin.options.appMountId)
       .container(id=htmlWebpackPlugin.options.appMountId)
+
+    footer.container
+      p.footer-information #{htmlWebpackPlugin.options.title} v#{htmlWebpackPlugin.options.version} | <a href="http://www.fransvilhelm.com">Adam Bergman</a>
+
     each file, key in htmlWebpackPlugin.files.chunks
       script(src=file.entry)
 </html>
