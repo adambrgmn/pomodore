@@ -8,9 +8,7 @@ export default class App extends React.Component {
   }
   render() {
     return (
-      <div className={styles.app}>
-        Bar
-      </div>
+      <h1 ref="header" className={styles.appHeader}>Adam</h1>
     );
   }
 }

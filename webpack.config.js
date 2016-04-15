@@ -15,17 +15,27 @@ const PATHS = {
 
 const common = {
   entry: [PATHS.app],
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
+  },
   output: {
     path: PATHS.build,
     publicPath: '/',
   },
+  module: {
+    loaders: [
+      {
+        test: /\.jade$/,
+        loader: 'jade',
+      },
+    ],
+  },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'node_modules/html-webpack-template/index.ejs',
+      template: './assets/templates/index.jade',
       inject: false,
       title: 'Pomodore',
       appMountId: 'app',
-      mobile: true,
       filename: 'index.html',
     }),
     new webpack.optimize.OccurenceOrderPlugin(),
