@@ -9,7 +9,7 @@ const pkg = require('./package.json');
 const TARGET = process.env.npm_lifecycle_event;
 const PATHS = {
   app: path.join(__dirname, 'src'),
-  build: path.join(__dirname, 'dist'),
+  build: path.join(__dirname, 'public'),
   style: path.join(__dirname, 'src/main.css'),
 };
 
@@ -18,14 +18,14 @@ process.env.BABEL_ENV = TARGET;
 const common = {
   entry: {
     bundle: PATHS.app,
-    style: PATHS.style,
+    // style: PATHS.style,
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
   },
   output: {
     path: PATHS.build,
-    filename: '[name].js',
+    filename: 'js/[name].js',
   },
   module: {
     loaders: [
@@ -46,7 +46,7 @@ const common = {
   ],
 };
 
-if (TARGET === 'start' || !TARGET) {
+if (TARGET === 'dev' || !TARGET) {
   module.exports = merge(common, {
     devtool: 'eval-source-map',
     devServer: {
@@ -58,15 +58,15 @@ if (TARGET === 'start' || !TARGET) {
       host: process.env.HOST,
       port: process.env.PORT,
     },
-    module: {
-      loaders: [
-        {
-          test: /\.css$/,
-          loaders: ['style', 'css'],
-          include: PATHS.app,
-        },
-      ],
-    },
+    // module: {
+    //   loaders: [
+    //     {
+    //       test: /\.css$/,
+    //       loaders: ['style', 'css'],
+    //       include: PATHS.app,
+    //     },
+    //   ],
+    // },
     plugins: [new webpack.HotModuleReplacementPlugin()],
   });
 }
@@ -75,17 +75,17 @@ if (TARGET === 'build:uncompressed') {
   module.exports = merge(common, {
     output: {
       path: PATHS.build,
-      filename: '[name].js',
+      filename: 'js/[name].js',
     },
-    module: {
-      loaders: [
-        {
-          test: /\.css$/,
-          loaders: ['style', 'css'],
-          include: PATHS.app,
-        },
-      ],
-    },
+    // module: {
+    //   loaders: [
+    //     {
+    //       test: /\.css$/,
+    //       loaders: ['style', 'css'],
+    //       include: PATHS.app,
+    //     },
+    //   ],
+    // },
     plugins: [
       new CleanPlugin([PATHS.build]),
     ],
@@ -99,21 +99,21 @@ if (TARGET === 'build' || TARGET === 'build:stats') {
     },
     output: {
       path: PATHS.build,
-      filename: '[name].[hash].js',
-      chunkFilename: '[hash].js',
+      filename: 'js/[name].[hash].js',
+      chunkFilename: 'js/[hash].js',
     },
-    module: {
-      loaders: [
-        {
-          test: /\.css$/,
-          loader: ExtractTextPlugin.extract('style', 'css'),
-          include: PATHS.app,
-        },
-      ],
-    },
+    // module: {
+    //   loaders: [
+    //     {
+    //       test: /\.css$/,
+    //       loader: ExtractTextPlugin.extract('style', 'css'),
+    //       include: PATHS.app,
+    //     },
+    //   ],
+    // },
     plugins: [
       new CleanPlugin([PATHS.build]),
-      new ExtractTextPlugin('[name].[hash].css'),
+      // new ExtractTextPlugin('[name].[hash].css'),
       new webpack.DefinePlugin({
         'process.env': {
           NODE_ENV: JSON.stringify('production'),
