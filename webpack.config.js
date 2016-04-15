@@ -1,130 +1,118 @@
+'use strict';
+
 const path = require('path');
 const webpack = require('webpack');
-const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const pkg = require('./package.json');
+const StatsPlugin = require('stats-webpack-plugin');
+const merge = require('webpack-merge');
 
 const TARGET = process.env.npm_lifecycle_event;
 const PATHS = {
-  app: path.join(__dirname, 'src'),
-  build: path.join(__dirname, 'public'),
-  style: path.join(__dirname, 'src/main.css'),
+  app: path.join(__dirname, 'app/main.js'),
+  build: path.join(__dirname, 'dist'),
 };
 
-process.env.BABEL_ENV = TARGET;
-
 const common = {
-  entry: {
-    bundle: PATHS.app,
-    // style: PATHS.style,
-  },
-  resolve: {
-    extensions: ['', '.js', '.jsx'],
-  },
+  entry: [PATHS.app],
   output: {
     path: PATHS.build,
-    filename: 'js/[name].js',
-  },
-  module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        loaders: ['babel?cacheDirectory'],
-        include: PATHS.app,
-      },
-    ],
+    publicPath: '/',
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'node_modules/html-webpack-template/index.ejs',
-      title: 'Todo app',
-      appMountId: 'app',
       inject: false,
+      title: 'Pomodore',
+      appMountId: 'app',
+      mobile: true,
+      filename: 'index.html',
     }),
+    new webpack.optimize.OccurenceOrderPlugin(),
   ],
 };
 
-if (TARGET === 'dev' || !TARGET) {
-  module.exports = merge(common, {
-    devtool: 'eval-source-map',
-    devServer: {
-      historyApiFallback: true,
-      hot: true,
-      inline: true,
-      progress: true,
-      stats: 'errors-only',
-      host: process.env.HOST,
-      port: process.env.PORT,
-    },
-    // module: {
-    //   loaders: [
-    //     {
-    //       test: /\.css$/,
-    //       loaders: ['style', 'css'],
-    //       include: PATHS.app,
-    //     },
-    //   ],
-    // },
-    plugins: [new webpack.HotModuleReplacementPlugin()],
-  });
-}
+if (TARGET === 'start' || !TARGET) {
+  common.entry.push('webpack-hot-middleware/client?reload=true');
+  common.plugins.push(
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development'),
+    })
+  );
 
-if (TARGET === 'build:uncompressed') {
   module.exports = merge(common, {
+    detool: 'eval-source-map',
     output: {
-      path: PATHS.build,
-      filename: 'js/[name].js',
+      filename: '[name].js',
     },
-    // module: {
-    //   loaders: [
-    //     {
-    //       test: /\.css$/,
-    //       loaders: ['style', 'css'],
-    //       include: PATHS.app,
-    //     },
-    //   ],
-    // },
-    plugins: [
-      new CleanPlugin([PATHS.build]),
-    ],
-  });
-}
-
-if (TARGET === 'build' || TARGET === 'build:stats') {
-  module.exports = merge(common, {
-    entry: {
-      vendor: Object.keys(pkg.dependencies).filter((v) => v !== 'alt-utils'),
-    },
-    output: {
-      path: PATHS.build,
-      filename: 'js/[name].[hash].js',
-      chunkFilename: 'js/[hash].js',
-    },
-    // module: {
-    //   loaders: [
-    //     {
-    //       test: /\.css$/,
-    //       loader: ExtractTextPlugin.extract('style', 'css'),
-    //       include: PATHS.app,
-    //     },
-    //   ],
-    // },
-    plugins: [
-      new CleanPlugin([PATHS.build]),
-      // new ExtractTextPlugin('[name].[hash].css'),
-      new webpack.DefinePlugin({
-        'process.env': {
-          NODE_ENV: JSON.stringify('production'),
+    module: {
+      loaders: [
+        {
+          test: /\jsx?$/,
+          exclude: /node_modules/,
+          loader: 'babel',
+          query: {
+            presets: ['react', 'es2015', 'stage-0', 'react-hmre'],
+          },
         },
-      }),
-      new webpack.optimize.UglifyJsPlugin({
-        compress: { warnings: false },
-      }),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: ['vendor', 'manifest'],
-      }),
+        {
+          test: /\.json?$/,
+          loader: 'json',
+        },
+        {
+          test: /\.css$/,
+          loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]',
+        },
+      ],
+    },
+  });
+}
+
+if (TARGET === 'build') {
+  common.plugins.push(
+    new ExtractTextPlugin('[name]-[hash].min.css'),
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        warnings: false,
+        screw_ie8: true,
+      },
+    }),
+    new StatsPlugin('webpack.stats.json', {
+      source: false,
+      modules: false,
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    })
+  );
+
+  module.exports = merge(common, {
+    output: {
+      filename: '[name]-[hash].js',
+    },
+    module: {
+      loaders: [{
+        test: /\.js?$/,
+        exclude: /node_modules/,
+        loader: 'babel',
+        query: {
+          presets: ['es2015', 'stage-0', 'react'],
+        },
+      }, {
+        test: /\.json?$/,
+        loader: 'json',
+      }, {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract(
+          'style',
+          'css?modules&localIdentName=[name]---[local]---[hash:base64:5]!postcss'
+        ),
+      }],
+    },
+    postcss: [
+      require('autoprefixer'),
     ],
   });
 }
