@@ -5,8 +5,9 @@ export default class ProgressBar extends React.Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount() {
-    this.progressBar.style.width = this.props.barWidth;
+  componentDidUpdate() {
+    const percentLeft = 100 - (this.props.timer.currentTime / this.props.timer.startTime) * 100;
+    this.progressBar.style.width = `${percentLeft}%`;
   }
   render() {
     return (

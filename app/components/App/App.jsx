@@ -1,8 +1,15 @@
 import React from 'react';
-import styles from './App.css';
 
 import ProgressBar from '../ProgressBar/ProgressBar';
 import Counter from '../Counter/Counter';
+
+const stateMock = {
+  timer: {
+    started: false,
+    startTime: 900000,
+    currentTime: 11000,
+  },
+};
 
 export default class App extends React.Component {
   constructor(props) {
@@ -11,8 +18,8 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="container">
-        <Counter timeLeft={69} />
-        <ProgressBar barWidth="50%" />
+        <Counter {...stateMock} />
+        <ProgressBar {...stateMock} />
       </div>
     );
   }
