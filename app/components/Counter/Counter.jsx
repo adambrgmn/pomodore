@@ -15,7 +15,7 @@ export default class Counter extends React.Component {
   }
   render() {
     return (<div className={styles.counter}>
-      {this.convertTime(this.props.timer.startTime, this.props.timer.currentTime)}
+      {this.convertTime(this.props.startTime, this.props.currentTime)}
     </div>);
   }
 }
