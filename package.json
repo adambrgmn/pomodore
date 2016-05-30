@@ -4,9 +4,9 @@
   "description": "A small Pomodore-timer",
   "main": "server.js",
   "scripts": {
-    "start": "export NODE_ENV=development && node server",
-    "preview": "export NODE_ENV=production && npm run build && node server",
-    "build": "export NODE_ENV=production && rimraf dist && webpack --progress --profile --colors",
+    "start": "NODE_ENV=development && node server",
+    "preview": "NODE_ENV=production && npm run build && node server",
+    "build": "NODE_ENV=production && rimraf dist && webpack --progress --profile --colors",
     "build:stats": "webpack --profile --json > stats.json",
     "test": "mocha --compilers js:babel-core/register --require ./test/setup.js --require ignore-styles 'app/**/*.spec.@(js|jsx)'",
     "test:watch": "npm run test -- --watch --watch-extensions jsx",
