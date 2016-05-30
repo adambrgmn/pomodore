@@ -1,6 +1,7 @@
 @import '../../styles/variables';
 
 .timer-counter {
+  margin-bottom: calc(#{$app-spacing} / 2);
   font-family: $app-font-mono;
   font-size: $app-font-size-big;
 }

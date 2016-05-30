@@ -1,0 +1,8 @@
+@import '../../styles/variables';
+
+.timer-buttons {
+  margin-bottom: $app-spacing;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}

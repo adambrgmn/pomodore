@@ -1,11 +1,16 @@
 import React from 'react';
 
+import './styles.scss';
+
 export default function Button(props) {
-  return (
-    <button>{props.value}</button>
-  );
+  return props.show ? (
+    <button className="button" onClick={() => props.handleClick(props.value)}>{props.text}</button>
+  ) : null;
 }
 
 Button.propTypes = {
-  value: React.PropTypes.string.isRequired,
+  handleClick: React.PropTypes.func,
+  value: React.PropTypes.number,
+  text: React.PropTypes.string.isRequired,
+  show: React.PropTypes.bool,
 };
