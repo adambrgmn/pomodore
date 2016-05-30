@@ -66,9 +66,11 @@
     "webpack-merge": "^0.13.0"
   },
   "dependencies": {
+    "animate.css": "^3.5.1",
     "classnames": "^2.2.5",
     "immutable": "^3.8.1",
     "react": "^15.1.0",
+    "react-addons-css-transition-group": "^15.1.0",
     "react-addons-pure-render-mixin": "^15.1.0",
     "react-dom": "^15.1.0"
   }

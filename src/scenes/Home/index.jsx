@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Map } from 'immutable';
 
 import './styles.scss';
@@ -72,13 +73,28 @@ export default class Home extends Component {
   handleStart(val) {
     if (this.timer) clearInterval(this.timer);
 
-    if (val) {
+    let value;
+    switch (val) {
+      case 'Pomodore':
+        value = 1500000;
+        break;
+      case 'Short break':
+        value = 300000;
+        break;
+      case 'Long break':
+        value = 900000;
+        break;
+      default:
+        value = null;
+    }
+
+    if (value) {
       this.setState(({ timer }) => ({
-        timer: timer.set('timerStartedAt', val),
+        timer: timer.set('timerStartedAt', value),
       }));
     }
 
-    this.startTimer(val || this.state.timer.get('currentTime'));
+    this.startTimer(value || this.state.timer.get('currentTime'));
   }
 
   handlePause() {
@@ -89,49 +105,47 @@ export default class Home extends Component {
     this.resetTimer();
   }
 
+  buttons() {
+    const isRunning = this.state.timer.get('isRunning');
+    const isPaused = this.state.timer.get('isPaused');
+
+    const pomodore = <Button key="pomodore" text="Pomodore" handleClick={this.handleStart} />;
+    const short = <Button key="short" text="Short break" handleClick={this.handleStart} />;
+    const long = <Button key="long" text="Long break" handleClick={this.handleStart} />;
+    const resume = <Button key="resume" text="Resume" handleClick={this.handleStart} />;
+    const pause = <Button key="pause" text="Pause" handleClick={this.handlePause} />;
+    const reset = <Button key="reset" text="Reset" handleClick={this.handleReset} />;
+
+    if (!isRunning) return [pomodore, short, long];
+    return [isPaused ? resume : pause, reset];
+  }
+
   render() {
     const currentTime = this.state.timer.get('currentTime');
     const timerStartedAt = this.state.timer.get('timerStartedAt');
-    const progress = timerStartedAt > 0 ? ((currentTime / timerStartedAt) * 100).toFixed(2) : 0;
+    const progress = timerStartedAt > 0 ?
+      ((currentTime / timerStartedAt) * 100).toFixed(2) :
+      (0).toString();
 
     return (
       <div className="timer">
         <Counter time={this.state.timer.get('currentTime')} />
         <Progressbar progress={progress} />
         <ButtonContainer>
-          <Button
-            text="Pomodore"
-            value={1500000}
-            handleClick={this.handleStart}
-            show={!this.state.timer.get('isRunning')}
-          />
-          <Button
-            text="Short break"
-            value={300000}
-            handleClick={this.handleStart}
-            show={!this.state.timer.get('isRunning')}
-          />
-          <Button
-            text="Long break"
-            value={900000}
-            handleClick={this.handleStart}
-            show={!this.state.timer.get('isRunning')}
-          />
-          <Button
-            text="Resume"
-            handleClick={this.handleStart}
-            show={this.state.timer.get('isPaused')}
-          />
-          <Button
-            text="Pause"
-            handleClick={this.handlePause}
-            show={this.state.timer.get('isRunning') && !this.state.timer.get('isPaused')}
-          />
-          <Button
-            text="Reset"
-            handleClick={this.handleReset}
-            show={this.state.timer.get('isRunning')}
-          />
+          <ReactCSSTransitionGroup
+            transitionName={{
+              enter: 'enter',
+              enterActive: 'fadeInDown',
+              leave: 'leave',
+              leaveActive: 'fadeOutDown',
+            }}
+            transitionEnterTimeout={2000}
+            transitionLeaveTimeout={1000}
+            component="div"
+            className="timer-buttons"
+          >
+            {this.buttons()}
+          </ReactCSSTransitionGroup>
         </ButtonContainer>
       </div>
     );

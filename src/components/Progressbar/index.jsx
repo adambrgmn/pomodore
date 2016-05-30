@@ -14,5 +14,5 @@ export default function Progressbar(props) {
 }
 
 Progressbar.propTypes = {
-  progress: React.PropTypes.number.isRequired,
+  progress: React.PropTypes.string.isRequired,
 };
