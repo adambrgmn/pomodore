@@ -1,20 +1,58 @@
-import React from 'react';
+import React, { Component } from 'react';
+import classnames from 'classnames';
 
 import './styles.scss';
 
-export default function Button(props) {
-  return (
-    <button
-      className="button animated"
-      onClick={() => props.handleClick(props.text)}
-    >
-      {props.text}
-    </button>
-  );
+export default class Button extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: false,
+      fadeInDown: false,
+      fadeOutDown: false,
+    };
+  }
+  componentWillAppear(cb) {
+    this.setState({ show: true });
+    cb();
+  }
+  componentWillEnter(cb) {
+    setTimeout(() => {
+      this.setState({ show: true, fadeInDown: true });
+      setTimeout(() => cb(), 1000);
+    }, 1000);
+  }
+  componentDidEnter() {
+    this.setState({ fadeInDown: false });
+  }
+  componentWillLeave(cb) {
+    this.setState({ fadeOutDown: true });
+    setTimeout(() => cb(), 1000);
+  }
+  componentDidLeave() {
+    this.setState({ show: false, fadeOutDown: false });
+  }
+  render() {
+    const classname = classnames({
+      button: true,
+      animated: true,
+      hide: !this.state.show,
+      fadeInDown: this.state.fadeInDown,
+      fadeOutDown: this.state.fadeOutDown,
+    });
+
+    return (
+      <button
+        className={classname}
+        onClick={() => this.props.handleClick(this.props.text)}
+      >
+        {this.props.text}
+      </button>
+    );
+  }
 }
 
 Button.propTypes = {
   handleClick: React.PropTypes.func,
-  value: React.PropTypes.number,
   text: React.PropTypes.string.isRequired,
 };

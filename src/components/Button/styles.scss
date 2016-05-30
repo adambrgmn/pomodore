@@ -29,10 +29,21 @@
 
   &::after {
     background: $app-main;
-    height: .375rem;
+    height: 0.375rem;
   }
 }
 
 .button:focus {
   outline: none;
+}
+
+.hide {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
 }

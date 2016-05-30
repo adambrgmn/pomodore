@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Map } from 'immutable';
 
 import './styles.scss';
@@ -131,20 +130,9 @@ export default class Home extends Component {
       <div className="timer">
         <Counter time={this.state.timer.get('currentTime')} />
         <Progressbar progress={progress} />
-        <ReactCSSTransitionGroup
-          transitionName={{
-            enter: 'enter',
-            enterActive: 'fadeIn',
-            leave: 'leave',
-            leaveActive: 'fadeOut',
-          }}
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={1000}
-          component="div"
-          className="timer-buttons animated"
-        >
+        <ButtonContainer>
           {this.buttons()}
-        </ReactCSSTransitionGroup>
+        </ButtonContainer>
       </div>
     );
   }

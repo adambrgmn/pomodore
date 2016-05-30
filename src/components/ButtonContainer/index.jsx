@@ -1,12 +1,13 @@
 import React from 'react';
+import ReactTransitionGroup from 'react-addons-transition-group';
 
 import './styles.scss';
 
 export default function ButtonContainer(props) {
   return (
-    <div className="timer-buttons">
+    <ReactTransitionGroup component="div" className="timer-buttons">
       {props.children}
-    </div>
+    </ReactTransitionGroup>
   );
 }
 
