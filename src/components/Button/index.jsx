@@ -4,7 +4,12 @@ import './styles.scss';
 
 export default function Button(props) {
   return (
-    <button className="button animated" onClick={() => props.handleClick(props.text)}>{props.text}</button>
+    <button
+      className="button animated"
+      onClick={() => props.handleClick(props.text)}
+    >
+      {props.text}
+    </button>
   );
 }
 

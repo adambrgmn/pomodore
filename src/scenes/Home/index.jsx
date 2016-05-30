@@ -131,22 +131,20 @@ export default class Home extends Component {
       <div className="timer">
         <Counter time={this.state.timer.get('currentTime')} />
         <Progressbar progress={progress} />
-        <ButtonContainer>
-          <ReactCSSTransitionGroup
-            transitionName={{
-              enter: 'enter',
-              enterActive: 'fadeInDown',
-              leave: 'leave',
-              leaveActive: 'fadeOutDown',
-            }}
-            transitionEnterTimeout={2000}
-            transitionLeaveTimeout={1000}
-            component="div"
-            className="timer-buttons"
-          >
-            {this.buttons()}
-          </ReactCSSTransitionGroup>
-        </ButtonContainer>
+        <ReactCSSTransitionGroup
+          transitionName={{
+            enter: 'enter',
+            enterActive: 'fadeIn',
+            leave: 'leave',
+            leaveActive: 'fadeOut',
+          }}
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={1000}
+          component="div"
+          className="timer-buttons animated"
+        >
+          {this.buttons()}
+        </ReactCSSTransitionGroup>
       </div>
     );
   }
