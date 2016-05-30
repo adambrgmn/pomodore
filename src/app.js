@@ -1,9 +1,11 @@
-require('./main.css');
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App/App';
 
-const component = <App />;
+import './app.scss';
+
+import Home from './scenes/Home';
+
+const component = (<Home />);
 const mountPoint = document.getElementById('app');
 
 ReactDOM.render(component, mountPoint);

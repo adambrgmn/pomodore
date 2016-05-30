@@ -1,0 +1,15 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Mono);
+@import './styles/variables';
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: $app-base;
+}
+
+body {
+  background: $app-background;
+  color: $app-black;
+}

@@ -1,15 +1,7 @@
 {
-    "extends": "airbnb",
-    "plugins": ["react", "mocha"],
-    "globals": {
-      "describe": false,
-      "it": false,
-      "before": false,
-      "beforeEach": false,
-      "after": false,
-      "afterEach": false,
-    },
-    "rules": {
-      "new-cap": ["error", { "capIsNewExceptions": ["Map", "List"] }]
-    }
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "rules": {
+    "strict": 0
+  }
 }

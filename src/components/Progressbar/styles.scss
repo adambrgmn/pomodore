@@ -1,0 +1,12 @@
+@import '../../styles/variables';
+
+.timer-progressbar-container {
+  width: 100%;
+  border-bottom: 1px solid $app-main;
+}
+
+.timer-progressbar {
+  height: 0.5rem;
+  background: $app-main;
+  transition: width 1s;
+}

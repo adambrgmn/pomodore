@@ -1,131 +1,124 @@
-const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const StatsPlugin = require('stats-webpack-plugin');
+const path = require('path');
 const merge = require('webpack-merge');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanPlugin = require('clean-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 const pkg = require('./package.json');
 
 const TARGET = process.env.npm_lifecycle_event;
 const PATHS = {
-  app: path.join(__dirname, 'app/main.js'),
+  app: path.join(__dirname, 'src'),
   build: path.join(__dirname, 'dist'),
 };
 
+process.env.BABEL_ENV = TARGET;
+
 const common = {
-  entry: [PATHS.app],
+  entry: {
+    bundle: path.join(PATHS.app, 'app.js'),
+  },
   resolve: {
     extensions: ['', '.js', '.jsx'],
   },
   output: {
     path: PATHS.build,
+    filename: '[name].js',
     publicPath: '/',
   },
   module: {
     loaders: [
       {
+        test: /\.jsx?$/,
+        loaders: ['babel?cacheDirectory'],
+        include: PATHS.app,
+      },
+      {
+        test: /\.json$/,
+        loaders: ['json'],
+      },
+      {
         test: /\.jade$/,
-        loader: 'jade',
+        loaders: ['jade'],
       },
     ],
   },
+  postcss: () => [autoprefixer],
+  sassLoader: {
+    data: `$env: '${TARGET}';`,
+  },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './assets/templates/index.jade',
-      inject: false,
+      template: 'templates/index.jade',
       appMountId: 'app',
-      filename: 'index.html',
-      // Options
+      inject: false,
       title: 'Pomodore',
-      tagline: 'A simple tomato timer',
-      version: pkg.version,
+      subtitle: 'A small and beatuiful pomodore timer',
+      description: 'A small and beatuiful pomodore timer',
     }),
     new webpack.optimize.OccurenceOrderPlugin(),
-  ],
-  postcss: [
-    require('autoprefixer'),
-    require('precss'),
   ],
 };
 
 if (TARGET === 'start' || !TARGET) {
-  common.entry.push('webpack-hot-middleware/client?reload=true');
-  common.plugins.push(
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development'),
-    })
-  );
-
   module.exports = merge(common, {
-    detool: 'eval-source-map',
-    output: {
-      filename: '[name].js',
+    devtool: 'eval-source-map',
+    devServer: {
+      historyApiFallback: true,
+      hot: true,
+      inline: true,
+      progress: true,
+      stats: 'errors-only',
+      host: process.env.HOST,
+      port: process.env.PORT,
     },
     module: {
       loaders: [
         {
-          test: /\jsx?$/,
-          exclude: /node_modules/,
-          loader: 'babel',
-          query: {
-            presets: ['react', 'es2015', 'stage-0', 'react-hmre'],
-          },
-        },
-        {
-          test: /\.json?$/,
-          loader: 'json',
-        },
-        {
-          test: /\.css$/,
-          loader: 'style!css?modules&importLoaders=1&localIdentName=[name]---[local]---[hash:base64:5]!postcss',
+          test: /\.scss$/,
+          loaders: ['style', 'css?sourceMap', 'postcss?sourceMap', 'sass?sourceMap'],
+          include: PATHS.app,
         },
       ],
     },
+    plugins: [
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoErrorsPlugin(),
+    ],
   });
 }
 
-if (TARGET === 'build') {
-  common.plugins.push(
-    new ExtractTextPlugin('[name]-[hash].min.css'),
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        warnings: false,
-        screw_ie8: true,
-      },
-    }),
-    new StatsPlugin('webpack.stats.json', {
-      source: false,
-      modules: false,
-    }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-    })
-  );
-
+if (TARGET === 'build' || TARGET === 'build:stats') {
   module.exports = merge(common, {
+    entry: {
+      vendor: Object.keys(pkg.dependencies),
+    },
     output: {
-      filename: '[name]-[hash].js',
+      filename: '[name].[hash].min.js',
     },
     module: {
-      loaders: [{
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          presets: ['react', 'es2015', 'stage-0'],
+      loaders: [
+        {
+          test: /\.scss$/,
+          loader: ExtractTextPlugin.extract('style', 'css!postcss!sass'),
         },
-      }, {
-        test: /\.json?$/,
-        loader: 'json',
-      }, {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract(
-          'style',
-          'css?modules&importLoaders=1&localIdentName=[name]---[local]---[hash:base64:5]!postcss'
-        ),
-      }],
+      ],
     },
+    plugins: [
+      new ExtractTextPlugin('style.[hash].min.css'),
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify('production'),
+        'process.env.BROWSER': true,
+        __DEV__: false,
+      }),
+      new webpack.optimize.DedupePlugin(),
+      new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.[hash].min.js'),
+      new webpack.optimize.OccurrenceOrderPlugin(),
+      new webpack.optimize.UglifyJsPlugin({
+        compress: { warnings: false, screw_ie8: true },
+      }),
+      new CleanPlugin([PATHS.build]),
+    ],
   });
 }
