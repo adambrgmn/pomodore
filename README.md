@@ -1,5 +1,5 @@
 # Pomodore
-## v3.0.0
+## v3.0.1
 
 A small but beautiful tomato-timer built with ReactJS.
 
