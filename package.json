@@ -81,7 +81,6 @@
     "react-addons-pure-render-mixin": "^15.1.0",
     "react-addons-transition-group": "^15.1.0",
     "react-dom": "^15.1.0",
-    "serve-favicon": "^2.3.0",
-    "soundmanager2": "^2.97.20150601-a"
+    "serve-favicon": "^2.3.0"
   }
 }
