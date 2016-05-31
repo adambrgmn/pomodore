@@ -45,6 +45,7 @@ export default class Button extends Component {
       <button
         className={classname}
         onClick={() => this.props.handleClick(this.props.text)}
+        data-popover={this.props.popover}
       >
         {this.props.text}
       </button>
@@ -55,4 +56,5 @@ export default class Button extends Component {
 Button.propTypes = {
   handleClick: React.PropTypes.func,
   text: React.PropTypes.string.isRequired,
+  popover: React.PropTypes.string,
 };

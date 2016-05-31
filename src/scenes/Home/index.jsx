@@ -108,9 +108,9 @@ export default class Home extends Component {
     const isRunning = this.state.timer.get('isRunning');
     const isPaused = this.state.timer.get('isPaused');
 
-    const pomodore = <Button key="pomodore" text="Pomodore" handleClick={this.handleStart} />;
-    const short = <Button key="short" text="Short break" handleClick={this.handleStart} />;
-    const long = <Button key="long" text="Long break" handleClick={this.handleStart} />;
+    const pomodore = <Button key="pomodore" text="Pomodore" handleClick={this.handleStart} popover="25 min" />;
+    const short = <Button key="short" text="Short break" handleClick={this.handleStart} popover="5 min" />;
+    const long = <Button key="long" text="Long break" handleClick={this.handleStart} popover="15 min" />;
     const resume = <Button key="resume" text="Resume" handleClick={this.handleStart} />;
     const pause = <Button key="pause" text="Pause" handleClick={this.handlePause} />;
     const reset = <Button key="reset" text="Reset" handleClick={this.handleReset} />;
