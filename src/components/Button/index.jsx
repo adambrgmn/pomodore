@@ -36,7 +36,7 @@ export default class Button extends Component {
     const classname = classnames({
       button: true,
       animated: true,
-      hide: !this.state.show,
+      'hide-button': !this.state.show,
       fadeInDown: this.state.fadeInDown,
       fadeOutDown: this.state.fadeOutDown,
     });

@@ -9,7 +9,7 @@ export default function Footer(props) {
       <p className="footer-paragraph">
         {capitalizeFirst(props.title)} v{props.version} |&nbsp;
         <a href="#" className="footer-link" onClick={props.handleAboutClick}>About</a> |&nbsp;
-        <a href={props.authorLink} className="footer-link">{props.author}</a>
+        <a href={props.authorLink} className="footer-link">Me</a>
       </p>
     </footer>
   );

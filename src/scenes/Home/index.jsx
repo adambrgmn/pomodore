@@ -4,7 +4,7 @@ import { Map } from 'immutable';
 import './styles.scss';
 
 import Header from './Header';
-import About from './About';
+import { AboutContainer, About } from './About';
 import Footer from './Footer';
 import Counter from '../../components/Counter';
 import Progressbar from '../../components/Progressbar';
@@ -153,7 +153,9 @@ export default class Home extends Component {
           author={pkg.author}
           handleAboutClick={this.toggleAbout}
         />
-        {this.state.aboutVisible ? <About /> : null}
+        <AboutContainer>
+          {this.state.aboutVisible ? <About /> : null}
+        </AboutContainer>
       </div>
     );
   }
