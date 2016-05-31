@@ -3,10 +3,14 @@ import { Map } from 'immutable';
 
 import './styles.scss';
 
+import Header from './Header';
+import About from './About';
+import Footer from './Footer';
 import Counter from '../../components/Counter';
 import Progressbar from '../../components/Progressbar';
 import ButtonContainer from '../../components/ButtonContainer';
 import Button from '../../components/Button';
+import pkg from '../../../package.json';
 
 export default class Home extends Component {
   constructor(props) {
@@ -16,6 +20,7 @@ export default class Home extends Component {
     this.handleStart = this.handleStart.bind(this);
     this.handlePause = this.handlePause.bind(this);
     this.handleReset = this.handleReset.bind(this);
+    this.toggleAbout = this.toggleAbout.bind(this);
 
     this.state = {
       timer: Map({
@@ -24,6 +29,7 @@ export default class Home extends Component {
         isRunning: false,
         isPaused: false,
       }),
+      aboutVisible: false,
     };
   }
 
@@ -104,6 +110,12 @@ export default class Home extends Component {
     this.resetTimer();
   }
 
+  toggleAbout(e) {
+    e.preventDefault();
+    const visible = this.state.aboutVisible;
+    this.setState({ aboutVisible: !visible });
+  }
+
   buttons() {
     const isRunning = this.state.timer.get('isRunning');
     const isPaused = this.state.timer.get('isPaused');
@@ -128,11 +140,20 @@ export default class Home extends Component {
 
     return (
       <div className="timer">
+        <Header title={pkg.name} description={pkg.description} />
         <Counter time={this.state.timer.get('currentTime')} />
         <Progressbar progress={progress} />
         <ButtonContainer>
           {this.buttons()}
         </ButtonContainer>
+        <Footer
+          title={pkg.name}
+          version={pkg.version}
+          authorLink={pkg.homepage.url}
+          author={pkg.author}
+          handleAboutClick={this.toggleAbout}
+        />
+        {this.state.aboutVisible ? <About /> : null}
       </div>
     );
   }

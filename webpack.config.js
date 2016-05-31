@@ -53,9 +53,13 @@ const common = {
       template: 'templates/index.jade',
       appMountId: 'app',
       inject: false,
-      title: 'Pomodore',
-      subtitle: 'A small and beatuiful pomodore timer',
-      description: 'A small and beatuiful pomodore timer',
+      title: ((str) => {
+        const arr = str.split('');
+        arr[0] = arr[0].toUpperCase();
+        return arr.join('');
+      })(pkg.name),
+      subtitle: pkg.description,
+      description: pkg.description,
     }),
     new webpack.optimize.OccurenceOrderPlugin(),
   ],

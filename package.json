@@ -1,7 +1,7 @@
 {
   "name": "pomodore",
   "version": "2.1.10",
-  "description": "A small Pomodore-timer",
+  "description": "A small and beatuiful pomodore timer",
   "main": "server.js",
   "scripts": {
     "start": "webpack-dev-server",
