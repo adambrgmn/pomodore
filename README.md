@@ -13,5 +13,3 @@ npm run start to run the node development server with webpack hmr enabled
 "build:stats": "webpack --profile --json > stats.json",
 "test": "mocha --compilers js:babel-core/register --require ./test/setup.js --require ignore-styles 'app/**/*.spec.@(js|jsx)'",
 "test:watch": "npm run test -- --watch --watch-extensions jsx",
-"deploy": "pm2 deploy ecosystem.json production",
-"deploy:setup": "pm2 deploy ecosystem.json production setup"

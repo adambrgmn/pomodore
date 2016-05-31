@@ -10,8 +10,6 @@
     "build": "webpack",
     "build:stats": "webpack --profile --json > stats.json",
     "preview": "npm run build && http-server ./dist",
-    "deploy": "pm2 deploy ecosystem.json production",
-    "deploy:setup": "pm2 deploy ecosystem.json production setup"
   },
   "repository": {
     "type": "git",
