@@ -1,6 +1,6 @@
 import express from 'express';
 import { join } from 'path';
-// import favicon from 'serve-favicon';
+import favicon from 'serve-favicon';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
@@ -12,7 +12,7 @@ const app = express();
 app.set('views', join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// app.use(favicon(join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(join(__dirname, 'public', 'icons', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
