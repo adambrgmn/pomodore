@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "server": "babel-node ./bin/www",
+    "server:production": "NODE_ENV=production babel-node ./bin/www",
     "build": "webpack",
     "build:stats": "webpack --profile --json > stats.json",
     "preview": "npm run build && http-server ./dist",
