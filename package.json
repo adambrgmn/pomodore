@@ -9,7 +9,7 @@
     "server:production": "NODE_ENV=production node ./bin/www",
     "build": "webpack",
     "build:stats": "webpack --profile --json > stats.json",
-    "preview": "npm run build && http-server ./dist",
+    "preview": "npm run build && http-server ./dist"
   },
   "repository": {
     "type": "git",
