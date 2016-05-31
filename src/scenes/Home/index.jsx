@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Map } from 'immutable';
+import Sound from 'react-sound';
 
 import './styles.scss';
 
@@ -16,6 +17,8 @@ export default class Home extends Component {
   constructor(props) {
     super(props);
     this.startTimer = this.startTimer.bind(this);
+    this.timerFinished = this.timerFinished.bind(this);
+    this.alertFinished = this.alertFinished.bind(this);
     this.resetTimer = this.resetTimer.bind(this);
     this.handleStart = this.handleStart.bind(this);
     this.handlePause = this.handlePause.bind(this);
@@ -30,6 +33,7 @@ export default class Home extends Component {
         isPaused: false,
       }),
       aboutVisible: false,
+      soundStatus: Sound.status.STOPPED,
     };
   }
 
@@ -47,6 +51,7 @@ export default class Home extends Component {
 
     this.timer = setInterval(() => {
       if (this.state.timer.get('currentTime') <= 0) {
+        this.timerFinished();
         this.resetTimer();
       } else {
         this.setState(({ timer }) => ({
@@ -61,6 +66,14 @@ export default class Home extends Component {
     this.setState(({ timer }) => ({
       timer: timer.set('isPaused', true),
     }));
+  }
+
+  timerFinished() {
+    this.setState({ soundStatus: Sound.status.PLAYING });
+  }
+
+  alertFinished() {
+    this.setState({ soundStatus: Sound.status.STOPPED });
   }
 
   resetTimer() {
@@ -81,7 +94,7 @@ export default class Home extends Component {
     let value;
     switch (val) {
       case 'Pomodore':
-        value = 1500000;
+        value = 5000;
         break;
       case 'Short break':
         value = 300000;
@@ -143,6 +156,11 @@ export default class Home extends Component {
         <Header title={pkg.name} description={pkg.description} />
         <Counter time={this.state.timer.get('currentTime')} />
         <Progressbar progress={progress} />
+        <Sound
+          url="src/static/alert.mp3"
+          playStatus={this.state.soundStatus}
+          onFinishedPlaying={this.alertFinished}
+        />
         <ButtonContainer>
           {this.buttons()}
         </ButtonContainer>
