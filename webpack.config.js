@@ -49,9 +49,6 @@ const common = {
   sassLoader: {
     data: `$env: '${TARGET}';`,
   },
-  node: {
-    fs: 'empty',
-  },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
   ],
@@ -101,7 +98,15 @@ if (TARGET === 'start' || !TARGET) {
 if (TARGET === 'build' || TARGET === 'build:stats') {
   module.exports = merge(common, {
     entry: {
-      vendor: Object.keys(pkg.dependencies),
+      vendor: [
+        'react',
+        'react-dom',
+        'react-addons-css-transition-group',
+        'react-addons-pure-render-mixin',
+        'react-addons-transition-group',
+        'classnames',
+        'immutable',
+      ],
     },
     output: {
       filename: '[name].[hash].min.js',
