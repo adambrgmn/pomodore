@@ -1,0 +1,17 @@
+@import '../../../styles/variables';
+
+.footer {
+  margin-top: 4rem;
+  font-family: $app-font-mono;
+  font-size: $app-font-size-small;
+}
+
+.footer-link {
+  color: $app-black;
+  text-decoration: none;
+  transition: color 0.3s;
+
+  &:hover {
+    color: $app-main;
+  }
+}

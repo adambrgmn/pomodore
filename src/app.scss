@@ -1,0 +1,23 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Mono:400,700);
+@import './styles/variables';
+@import './styles/animations';
+@import './scenes/Home/home';
+@import './components/Button/button';
+@import './components/ButtonContainer/buttonContainer';
+@import './components/Counter/counter';
+@import './components/Progressbar/progressbar';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: $app-base;
+}
+
+body {
+  background: $app-background;
+  color: $app-black;
+}

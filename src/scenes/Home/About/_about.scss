@@ -1,0 +1,39 @@
+@import '../../../styles/variables';
+@import '../../../styles/animations';
+
+.about-text {
+  margin-top: 2rem;
+  font-family: $app-font-mono;
+}
+
+.about-link {
+  color: $app-black;
+  transition: color 0.3s;
+
+  &:hover {
+    color: $app-main;
+  }
+}
+
+.hide-about {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+
+.about-animated {
+  @include animated();
+}
+
+.about-fadeInUp {
+  @include fadeInUp();
+}
+
+.about-fadeOutDown {
+  @include fadeOutDown();
+}
