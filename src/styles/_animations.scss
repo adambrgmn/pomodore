@@ -1,0 +1,52 @@
+@import 'variables';
+
+@mixin animated {
+  animation-duration: $app-animation-duration;
+  animation-fill-mode: both;
+}
+
+@mixin fadeInDown {
+  animation-name: fadeInDown;
+}
+
+@mixin fadeInUp {
+  animation-name: fadeInUp;
+}
+
+@mixin fadeOutDown {
+  animation-name: fadeOutDown;
+}
+
+// Keyframes
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+}

@@ -31,9 +31,9 @@ export class About extends Component {
   render() {
     const classname = classnames({
       'about-text': true,
-      animated: true,
-      fadeInUp: this.state.show,
-      fadeOutDown: !this.state.show,
+      'about-animated': true,
+      'about-fadeInUp': this.state.show,
+      'about-fadeOutDown': !this.state.show,
     });
     return (
       <div className={classname}>

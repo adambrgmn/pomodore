@@ -48,19 +48,10 @@ const common = {
   sassLoader: {
     data: `$env: '${TARGET}';`,
   },
+  node: {
+    fs: 'empty',
+  },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: 'templates/index.jade',
-      appMountId: 'app',
-      inject: false,
-      title: ((str) => {
-        const arr = str.split('');
-        arr[0] = arr[0].toUpperCase();
-        return arr.join('');
-      })(pkg.name),
-      subtitle: pkg.description,
-      description: pkg.description,
-    }),
     new webpack.optimize.OccurenceOrderPlugin(),
   ],
 };
@@ -76,6 +67,7 @@ if (TARGET === 'start' || !TARGET) {
       stats: 'errors-only',
       host: process.env.HOST,
       port: process.env.PORT,
+      contentBase: 'public/',
     },
     module: {
       loaders: [
@@ -87,6 +79,18 @@ if (TARGET === 'start' || !TARGET) {
       ],
     },
     plugins: [
+      new HtmlWebpackPlugin({
+        template: 'templates/index.jade',
+        appMountId: 'app',
+        inject: false,
+        title: ((str) => {
+          const arr = str.split('');
+          arr[0] = arr[0].toUpperCase();
+          return arr.join('');
+        })(pkg.name),
+        subtitle: pkg.description,
+        description: pkg.description,
+      }),
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoErrorsPlugin(),
     ],
@@ -106,6 +110,7 @@ if (TARGET === 'build' || TARGET === 'build:stats') {
         {
           test: /\.scss$/,
           loader: ExtractTextPlugin.extract('style', 'css!postcss!sass'),
+          include: PATHS.app,
         },
       ],
     },

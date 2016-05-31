@@ -35,10 +35,10 @@ export default class Button extends Component {
   render() {
     const classname = classnames({
       button: true,
-      animated: true,
+      'button-animated': true,
       'hide-button': !this.state.show,
-      fadeInDown: this.state.fadeInDown,
-      fadeOutDown: this.state.fadeOutDown,
+      'button-fadeInDown': this.state.fadeInDown,
+      'button-fadeOutDown': this.state.fadeOutDown,
     });
 
     return (
