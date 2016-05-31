@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Map } from 'immutable';
 
-import './styles.scss';
-
 import Header from './Header';
 import { AboutContainer, About } from './About';
 import Footer from './Footer';

@@ -1,8 +1,6 @@
 import React from 'react';
 import capitalizeFirst from '../../../lib/capitalizeFirst';
 
-import './styles.scss';
-
 export default function Header(props) {
   return (
     <header className="header">

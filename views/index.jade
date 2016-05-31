@@ -17,7 +17,7 @@ html.no-js(lang="en")
       link(href=file, rel="stylesheet")
   body
     if (options.appMountId)
-      .container(id=options.appMountId)
+      .container(id=options.appMountId)!= options.app
 
     each file, key in files.chunks
       script(src=file)

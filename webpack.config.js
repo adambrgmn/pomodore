@@ -18,6 +18,7 @@ process.env.BABEL_ENV = TARGET;
 const common = {
   entry: {
     bundle: path.join(PATHS.app, 'app.js'),
+    styles: path.join(PATHS.app, 'app.scss'),
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],

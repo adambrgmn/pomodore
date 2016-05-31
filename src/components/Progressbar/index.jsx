@@ -1,7 +1,5 @@
 import React from 'react';
 
-import './styles.scss';
-
 export default function Progressbar(props) {
   return (
     <div className="timer-progressbar-container">

@@ -7,7 +7,6 @@ const router = Router();
 router.get('*', (req, res, next) => {
   const css = [];
   const chunks = [];
-  console.log(renderApp());
 
   findFiles('dist/*.{js,css}')
     .then((files) => {
@@ -21,7 +20,7 @@ router.get('*', (req, res, next) => {
           title: 'Pomodore',
           subtitle: 'A small and beatuiful pomodore timer',
           appMountId: 'app',
-          app: '',
+          app: renderApp(),
         },
         files: {
           chunks: chunks.reverse(),

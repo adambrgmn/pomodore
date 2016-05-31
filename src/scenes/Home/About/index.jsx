@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import ReactTransitionGroup from 'react-addons-transition-group';
 import classnames from 'classnames';
 
-import './styles.scss';
-
 export function AboutContainer(props) {
   return <ReactTransitionGroup component="div">{props.children}</ReactTransitionGroup>;
 }
