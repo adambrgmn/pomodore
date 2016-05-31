@@ -28,7 +28,7 @@
       "ref": "origin/master",
       "repo": "https://github.com/adambrgmn/pomodore.git",
       "path": "/var/www/prod/pomodore.fransvilhelm.com",
-      "post-deploy": "npm install && npm run build ; pm2 startOrRestart ecosystem.json --env production --interpreter ./node_modules/.bin/babel-node",
+      "post-deploy": "npm install && npm run build && pm2 startOrRestart --interpreter ./node_modules/.bin/babel-node --env production ecosystem.json",
       "env": {
         "NODE_ENV": "production"
       }
