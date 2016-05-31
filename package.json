@@ -1,6 +1,6 @@
 {
   "name": "pomodore",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "A small and beatuiful pomodore timer",
   "main": "server.js",
   "scripts": {
