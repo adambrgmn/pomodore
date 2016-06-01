@@ -63,11 +63,14 @@
     "stylelint-config-standard": "^8.0.0",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1",
+    "webpack-manifest-plugin": "^1.0.1",
+    "webpack-md5-hash": "0.0.5",
     "webpack-merge": "^0.13.0"
   },
   "dependencies": {
     "babel-register": "^6.9.0",
     "body-parser": "^1.15.1",
+    "chunk-manifest-webpack-plugin": "^0.1.0",
     "classnames": "^2.2.5",
     "cookie-parser": "^1.4.3",
     "debug": "^2.2.0",

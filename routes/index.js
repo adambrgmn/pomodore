@@ -10,7 +10,7 @@ router.get('*', (req, res, next) => {
   const css = [];
   const chunks = [];
 
-  findFiles('dist/*.{js,css}')
+  findFiles('dist/**/*.{js,css}')
     .then((files) => {
       files.forEach((file) => {
         if (file.match(/.css$/)) css.push(file);

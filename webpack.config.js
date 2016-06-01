@@ -3,6 +3,9 @@ const path = require('path');
 const merge = require('webpack-merge');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
+const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
+const WebpackMd5Hash = require('webpack-md5-hash');
 const CleanPlugin = require('clean-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const pkg = require('./package.json');
@@ -18,7 +21,7 @@ process.env.BABEL_ENV = TARGET;
 const common = {
   entry: {
     bundle: path.join(PATHS.app, 'app.js'),
-    styles: path.join(PATHS.app, 'app.scss'),
+    style: path.join(PATHS.app, 'app.scss'),
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
@@ -109,7 +112,7 @@ if (TARGET === 'build' || TARGET === 'build:stats') {
       ],
     },
     output: {
-      filename: '[name].[hash].min.js',
+      filename: 'js/[name].[hash].min.js',
     },
     module: {
       loaders: [
@@ -121,14 +124,14 @@ if (TARGET === 'build' || TARGET === 'build:stats') {
       ],
     },
     plugins: [
-      new ExtractTextPlugin('style.[hash].min.css'),
+      new ExtractTextPlugin('css/style.[hash].min.css'),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('production'),
         'process.env.BROWSER': true,
         __DEV__: false,
       }),
+      new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', minChunks: Infinity }),
       new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.[hash].min.js'),
       new webpack.optimize.OccurrenceOrderPlugin(),
       new webpack.optimize.UglifyJsPlugin({
         compress: { warnings: false, screw_ie8: true },
