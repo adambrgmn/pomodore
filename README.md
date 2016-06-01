@@ -1,5 +1,5 @@
 # Pomodore
-## v3.0.4
+## v3.0.5
 
 A small but beautiful tomato-timer built with React and others.
 
@@ -13,3 +13,5 @@ npm run start to run the node development server with webpack hmr enabled
 "build:stats": "webpack --profile --json > stats.json",
 "test": "mocha --compilers js:babel-core/register --require ./test/setup.js --require ignore-styles 'app/**/*.spec.@(js|jsx)'",
 "test:watch": "npm run test -- --watch --watch-extensions jsx",
+
+TODO: Update deployment method
