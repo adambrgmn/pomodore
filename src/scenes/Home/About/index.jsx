@@ -37,7 +37,7 @@ export class About extends Component {
       <div className={classname}>
         <p>Pomodore is a small, simple and – if I may say so – beautiful <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique" className="about-link">tomato timer</a>.</p>
         <p>The usage is pretty straightforward: Just start a new pomodore and work until you hear the bell.</p>
-        <p>Then take a small break, stretch your legs and grab a cup of coffee. And every once in a while you may take a longer break and contemplate over the meaning of life!</p>
+        <p>Then take a small break, stretch your legs and grab a cup of coffee. And every once in a while you may take a longer break and contemplate over the meaning of life...</p>
         <ul className="about-list">
           <li><strong>Pomodore:</strong> 25 minutes</li>
           <li><strong>Short break:</strong> 5 minutes</li>

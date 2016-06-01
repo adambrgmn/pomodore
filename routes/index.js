@@ -3,19 +3,15 @@ import findFiles from '../lib/findFiles';
 import renderApp from '../lib/renderApp';
 import capitalizeFirst from '../src/lib/capitalizeFirst';
 import pkg from '../package.json';
+import fs from 'fs';
+import { resolve } from 'path';
 
-const router = Router();
+const router = new Router();
 
 router.get('*', (req, res, next) => {
-  const css = [];
-  const chunks = [];
-
   findFiles('dist/**/*.{js,css}')
     .then((files) => {
-      files.forEach((file) => {
-        if (file.match(/.css$/)) css.push(file);
-        if (file.match(/.js$/)) chunks.push(file);
-      });
+      files.manifest = fs.readFileSync(resolve(__dirname, '..', 'dist', files.manifest), 'utf8');
 
       res.render('index', {
         options: {
@@ -28,10 +24,7 @@ router.get('*', (req, res, next) => {
           appMountId: 'app',
           app: renderApp(),
         },
-        files: {
-          chunks: chunks.reverse(),
-          css,
-        },
+        files,
       });
     })
     .catch((err) => next(err));
