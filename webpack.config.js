@@ -18,7 +18,7 @@ process.env.BABEL_ENV = TARGET;
 const common = {
   entry: {
     bundle: path.join(PATHS.app, 'app.js'),
-    styles: path.join(PATHS.app, 'app.scss'),
+    style: path.join(PATHS.app, 'app.scss'),
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
@@ -109,7 +109,8 @@ if (TARGET === 'build' || TARGET === 'build:stats') {
       ],
     },
     output: {
-      filename: '[name].[hash].min.js',
+      filename: 'js/[name].[chunkhash].min.js',
+      chunkFilename: '[chunkhash].js',
     },
     module: {
       loaders: [
@@ -121,14 +122,14 @@ if (TARGET === 'build' || TARGET === 'build:stats') {
       ],
     },
     plugins: [
-      new ExtractTextPlugin('style.[hash].min.css'),
+      new ExtractTextPlugin('css/style.[chunkhash].min.css'),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('production'),
         'process.env.BROWSER': true,
         __DEV__: false,
       }),
+      new webpack.optimize.CommonsChunkPlugin({ names: ['vendor', 'manifest'], minChunks: Infinity }),
       new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.[hash].min.js'),
       new webpack.optimize.OccurrenceOrderPlugin(),
       new webpack.optimize.UglifyJsPlugin({
         compress: { warnings: false, screw_ie8: true },
