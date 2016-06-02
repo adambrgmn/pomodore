@@ -1,7 +1,7 @@
 {
   "name": "pomodore",
-  "version": "3.1.0",
-  "description": "A small and beatuiful pomodore timer",
+  "version": "3.1.1",
+  "description": "A small and beautiful pomodore timer",
   "main": "server.js",
   "scripts": {
     "start": "webpack-dev-server",
@@ -72,9 +72,11 @@
     "body-parser": "^1.15.1",
     "chunk-manifest-webpack-plugin": "^0.1.0",
     "classnames": "^2.2.5",
+    "compression": "^1.6.2",
     "cookie-parser": "^1.4.3",
     "debug": "^2.2.0",
     "glob": "^7.0.3",
+    "helmet": "^2.1.0",
     "immutable": "^3.8.1",
     "jade": "^1.11.0",
     "morgan": "^1.7.0",
