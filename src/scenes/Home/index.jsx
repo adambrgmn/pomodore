@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Map } from 'immutable';
 
+import Alert from '../../lib/Alert';
+
 import Header from './Header';
 import { AboutContainer, About } from './About';
 import Footer from './Footer';
@@ -31,6 +33,10 @@ export default class Home extends Component {
     };
   }
 
+  componentDidMount() {
+    this.alert = new Alert('alert');
+  }
+
   startTimer(time) {
     this.setState(({ timer }) => ({
       timer: timer
@@ -39,12 +45,9 @@ export default class Home extends Component {
         .set('isPaused', false),
     }));
 
-    this.setState(({ timer }) => ({
-      timer: timer.set('currentTime', time),
-    }));
-
     this.timer = setInterval(() => {
       if (this.state.timer.get('currentTime') <= 0) {
+        this.alert.play(3);
         this.resetTimer();
       } else {
         this.setState(({ timer }) => ({
