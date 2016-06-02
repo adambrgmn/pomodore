@@ -24,7 +24,7 @@ app.use(cookieParser());
 app.use(express.static(join(__dirname, 'dist')));
 app.use(express.static(join(__dirname, 'public')));
 
-app.use('/', routes);
+routes(app);
 
 app.use((req, res, next) => {
   const err = new Error('Not found');
