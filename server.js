@@ -4,6 +4,8 @@ import favicon from 'serve-favicon';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
+import helmet from 'helmet';
+import compression from 'compression';
 
 import routes from './routes/index';
 
@@ -12,6 +14,8 @@ const app = express();
 app.set('views', join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(compression());
+app.use(helmet());
 app.use(favicon(join(__dirname, 'public', 'icons', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
