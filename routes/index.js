@@ -20,6 +20,7 @@ router.get('*', (req, res, next) => {
           descriptionLong: 'Pomodore is a small, simple and – if I may say so – beautiful tomato timer. Just start a new pomodore and work until you hear the bell.',
           url: 'http://pomodore.fransvilhelm.com/',
           fbId: '1528042234158058',
+          gaId: 'UA-71140948-1',
           themeColor: '#000aff',
           appMountId: 'app',
           app: renderApp(),
