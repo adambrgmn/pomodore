@@ -44,6 +44,6 @@ server.on('error', (error) => {
 server.on('listening', () => {
   const addr = server.address();
   const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
-  winston.log('info', `Server created and listening to port ${port}`);
+  winston.log('info', `Server created and listening to port ${port} in ${app.get('env')} mode`);
   debug(`Listening on ${bind}`);
 });
