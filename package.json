@@ -5,11 +5,10 @@
   "main": "server.js",
   "scripts": {
     "start": "webpack-dev-server",
-    "server": "node ./bin/www",
+    "server": "DEBUG=pomodore node ./bin/www",
     "server:production": "NODE_ENV=production node ./bin/www",
     "build": "webpack",
-    "build:stats": "webpack --profile --json > stats.json",
-    "preview": "npm run build && http-server ./dist"
+    "build:stats": "webpack --profile --json > stats.json"
   },
   "repository": {
     "type": "git",
@@ -79,12 +78,14 @@
     "helmet": "^2.1.0",
     "immutable": "^3.8.1",
     "jade": "^1.11.0",
+    "lodash": "^4.13.1",
     "morgan": "^1.7.0",
     "react": "^15.1.0",
     "react-addons-css-transition-group": "^15.1.0",
     "react-addons-pure-render-mixin": "^15.1.0",
     "react-addons-transition-group": "^15.1.0",
     "react-dom": "^15.1.0",
-    "serve-favicon": "^2.3.0"
+    "serve-favicon": "^2.3.0",
+    "winston": "^2.2.0"
   }
 }

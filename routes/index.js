@@ -1,15 +1,15 @@
+import fs from 'fs';
+import { resolve } from 'path';
 import findFiles from '../lib/findFiles';
 import renderApp from '../lib/renderApp';
 import capitalizeFirst from '../src/lib/capitalizeFirst';
 import pkg from '../package.json';
-import fs from 'fs';
-import { resolve } from 'path';
 
 export default function routes(app) {
   app.get('*', (req, res, next) => {
     findFiles('dist/**/*.{js,css}')
       .then((files) => {
-        files.manifest = fs.readFileSync(resolve(__dirname, '..', 'dist', files.manifest), 'utf8');
+        files.manifest = fs.readFileSync(resolve(app.get('appPath'), files.manifest), 'utf8');
 
         res.render('index', {
           options: {
