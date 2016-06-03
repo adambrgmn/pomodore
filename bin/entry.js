@@ -21,6 +21,7 @@ winston.log('silly', 'Server created');
 
 server.on('error', (error) => {
   if (error.syscall !== 'listen') {
+    winston.log('error', 'An error occured', error);
     throw error;
   }
 
