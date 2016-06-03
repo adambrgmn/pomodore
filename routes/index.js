@@ -1,34 +1,20 @@
-import { Router } from 'express';
+import winston from 'winston';
 import findFiles from '../lib/findFiles';
+import getManifestContent from '../lib/getManifestContent';
 import renderApp from '../lib/renderApp';
-import capitalizeFirst from '../src/lib/capitalizeFirst';
-import pkg from '../package.json';
-import fs from 'fs';
-import { resolve } from 'path';
+import setDefaults from '../lib/setDefaults';
 
-const router = new Router();
-
-router.get('*', (req, res, next) => {
-  findFiles('dist/**/*.{js,css}')
-    .then((files) => {
-      files.manifest = fs.readFileSync(resolve(__dirname, '..', 'dist', files.manifest), 'utf8');
-
-      res.render('index', {
-        options: {
-          title: capitalizeFirst(pkg.name),
-          subtitle: pkg.description,
-          descriptionLong: 'Pomodore is a small, simple and – if I may say so – beautiful tomato timer. Just start a new pomodore and work until you hear the bell.',
-          url: 'http://pomodore.fransvilhelm.com/',
-          fbId: '1528042234158058',
-          gaId: 'UA-71140948-1',
-          themeColor: '#000aff',
-          appMountId: 'app',
-          app: renderApp(),
-        },
-        files,
-      });
-    })
-    .catch((err) => next(err));
-});
-
-export default router;
+export default function routes(app) {
+  app.get('*', (req, res, next) => {
+    winston.profile('request');
+    findFiles('dist/**/*.{js,css}', {})        // Find paths to app files (in dist)
+      .then(getManifestContent)                // Convert manifest to string
+      .then(renderApp)                         // Render app to string
+      .then(setDefaults)                       // Set default options
+      .then((opt) => {
+        winston.profile('request');
+        return res.render('index', opt);
+      }) // Render with index.jade
+      .catch(next);                            // Catch if errors
+  });
+}

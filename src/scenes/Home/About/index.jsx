@@ -43,7 +43,11 @@ export class About extends Component {
           <li><strong>Short break:</strong> 5 minutes</li>
           <li><strong>Long break:</strong> 15 minutes</li>
         </ul>
-        <p><a href="https://www.facebook.com/dialog/share?app_id=1528042234158058&amp;display=popup&amp;href=http%3A%2F%2Fpomodore.fransvilhelm.com&amp;redirect_uri=http%3A%2F%2Fpomodore.fransvilhelm.com" className="about-link">Share on Facebook!</a></p>
+        <p>
+          <a
+            href="https://www.facebook.com/dialog/share?app_id=1528042234158058&amp;redirect_uri=http%3A%2F%2Fpomodore.fransvilhelm.com&amp;display=popup&amp;href=http%3A%2F%2Fpomodore.fransvilhelm.com"
+            className="about-link"
+          >Share on Facebook!</a></p>
       </div>
     );
   }
