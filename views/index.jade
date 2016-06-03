@@ -18,7 +18,7 @@ html.no-js(lang="en")
     link(href=files.style, rel="stylesheet")
   body
     if (options.appMountId)
-      .container(id=options.appMountId)!= options.app
+      .container(id=options.appMountId)!= app
 
     script!= files.manifest
     script(src=files.vendor)

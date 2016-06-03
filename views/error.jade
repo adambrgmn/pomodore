@@ -2,7 +2,57 @@ doctype html
 html
   head
     title= title
+    style.
+      @import url(https://fonts.googleapis.com/css?family=Roboto+Mono:400,700);
+      *, *::before, *::after { box-sizing: border-box; }
+      html { font-size: 16px; }
+      body {
+        background: #f0f0f0;
+        color: #0f0f0f;
+      }
+      .container {
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-flow: column nowrap;
+        flex-flow: column;
+        margin: 0 auto;
+        max-width: 75rem;
+        width: 100%;
+      }
+      .header {
+        margin: 2rem auto 4rem;
+        text-align: center;
+      }
+      .title,
+      .subtitle,
+      .tagline {
+        margin: 0;
+        font-family: Roboto Mono,monospaced;
+      }
+      .title {
+        font-weight: 700;
+        font-size: 3.129rem;
+      }
+      .subtitle {
+        font-weight: 700;
+        font-size: 2.5rem;
+      }
+      .code {
+        width: 100%;
+        overflow: scroll;
+        padding: 2rem !important;
+      }
+
   body
-    h1= message
-    h2= error.status
-    pre #{error.stack}
+    .container
+      header.header
+        h1.title Pomodore
+        h2.subtitle Error
+        p.tagline #{error.status}
+      pre.code.prettyprint #{error.stack}
+
+    script(src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=desert")

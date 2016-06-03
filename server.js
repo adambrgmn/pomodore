@@ -11,10 +11,7 @@ import { join } from 'path';
 import config from './config';
 import routes from './routes/index';
 
-winston.level = config.logLevel;
-
 const app = express();
-winston.log('silly', 'App initiated');
 
 app.set('views', join(config.root, 'views'));
 app.set('view engine', 'jade');
