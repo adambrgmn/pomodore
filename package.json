@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "server": "DEBUG=pomodore node ./bin/www",
-    "server:production": "NODE_ENV=production node ./bin/www",
+    "server:prod": "NODE_ENV=production LOG_LEVEL=info node ./bin/www",
     "build": "webpack",
     "build:stats": "webpack --profile --json > stats.json"
   },
