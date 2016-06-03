@@ -2,6 +2,7 @@ const debug = require('debug')('pomodore');
 
 import app from '../server';
 import http from 'http';
+import winston from 'winston';
 
 function normalizePort(val) {
   const port = parseInt(val, 10);
@@ -12,9 +13,11 @@ function normalizePort(val) {
 
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
+winston.log('silly', 'Port set', app.get('port'));
 
 const server = http.createServer(app);
 server.listen(port);
+winston.log('silly', 'Server created');
 
 server.on('error', (error) => {
   if (error.syscall !== 'listen') {
@@ -25,14 +28,15 @@ server.on('error', (error) => {
 
   switch (error.code) {
     case 'EACCES':
-      console.error(`${bind} requires elevated privileges`);
+      winston.log('error', `${bind} requires elevated privileges. Exiting...`);
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      console.error(`${bind} is already in use`);
+      winston.log('error', `${bind} is already in use. Exiting...`);
       process.exit(1);
       break;
     default:
+      winston.log('error', 'An error occured', error);
       throw error;
   }
 });
@@ -40,5 +44,6 @@ server.on('error', (error) => {
 server.on('listening', () => {
   const addr = server.address();
   const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
+  winston.log('info', `Server created and listening to port ${port}`);
   debug(`Listening on ${bind}`);
 });
