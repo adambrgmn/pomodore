@@ -1,22 +1,27 @@
+import winston from 'winston';
+import { merge } from 'lodash';
 import findFiles from '../lib/findFiles';
 import getManifestContent from '../lib/getManifestContent';
 import setDefaults from '../lib/setDefaults';
+import renderApp from '../lib/renderApp';
 
 export default function routes(app) {
+  const options = {};
+  let error;
+  findFiles('dist/**/*.{js,css}', {})
+    .then(getManifestContent)
+    .then(setDefaults)
+    .then(renderApp)
+    .then((opt) => {
+      winston.log('silly', 'Prepared app');
+      return merge(options, opt);
+    })
+    .catch((err) => {
+      error = err;
+    });
+
   app.get('*', (req, res, next) => {
-    findFiles('dist/**/*.{js,css}', {}) // Find paths to app files (in dist)
-      .then(getManifestContent) // Convert manifest to string
-      .then(setDefaults) // Set default options
-      .then((opt) => {
-        const options = opt;
-        options.app = app.get('renderedApp'); // App already rendered in memory
-        options.cdn = {
-          react: 'https://fb.me/react-with-addons-15.1.0.min.js',
-          reactDOM: 'https://fb.me/react-dom-15.1.0.min.js',
-          immutable: 'https://cdnjs.cloudflare.com/ajax/libs/immutable/3.8.1/immutable.min.js',
-        };
-        return res.render('index', options);
-      }) // Render with index.jade
-      .catch(next); // Catch if errors
+    if (error) return next(error);
+    return res.render('index', options);
   });
 }

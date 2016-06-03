@@ -17,6 +17,11 @@ const common = {
     themeColor: '#000aff',
     appMountId: 'app',
   },
+  cdn: {
+    react: 'https://fb.me/react-with-addons-15.1.0.min.js',
+    reactDOM: 'https://fb.me/react-dom-15.1.0.min.js',
+    immutable: 'https://cdnjs.cloudflare.com/ajax/libs/immutable/3.8.1/immutable.min.js',
+  },
 };
 
 const env = {
