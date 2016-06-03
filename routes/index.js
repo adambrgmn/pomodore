@@ -1,20 +1,22 @@
-import winston from 'winston';
 import findFiles from '../lib/findFiles';
 import getManifestContent from '../lib/getManifestContent';
-import renderApp from '../lib/renderApp';
 import setDefaults from '../lib/setDefaults';
 
 export default function routes(app) {
   app.get('*', (req, res, next) => {
-    winston.profile('request');
-    findFiles('dist/**/*.{js,css}', {})        // Find paths to app files (in dist)
-      .then(getManifestContent)                // Convert manifest to string
-      .then(renderApp)                         // Render app to string
-      .then(setDefaults)                       // Set default options
+    findFiles('dist/**/*.{js,css}', {}) // Find paths to app files (in dist)
+      .then(getManifestContent) // Convert manifest to string
+      .then(setDefaults) // Set default options
       .then((opt) => {
-        winston.profile('request');
-        return res.render('index', opt);
+        const options = opt;
+        options.app = app.get('renderedApp'); // App already rendered in memory
+        options.cdn = {
+          react: 'https://fb.me/react-with-addons-15.1.0.min.js',
+          reactDOM: 'https://fb.me/react-dom-15.1.0.min.js',
+          immutable: 'https://cdnjs.cloudflare.com/ajax/libs/immutable/3.8.1/immutable.min.js',
+        };
+        return res.render('index', options);
       }) // Render with index.jade
-      .catch(next);                            // Catch if errors
+      .catch(next); // Catch if errors
   });
 }

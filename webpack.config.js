@@ -99,13 +99,13 @@ if (TARGET === 'build' || TARGET === 'build:stats') {
   module.exports = merge(common, {
     entry: {
       vendor: [
-        'react',
-        'react-dom',
-        'react-addons-css-transition-group',
-        'react-addons-pure-render-mixin',
-        'react-addons-transition-group',
+        // 'react',
+        // 'react-dom',
+        // 'react-addons-css-transition-group',
+        // 'react-addons-pure-render-mixin',
+        // 'react-addons-transition-group',
         'classnames',
-        'immutable',
+        // 'immutable',
       ],
     },
     output: {

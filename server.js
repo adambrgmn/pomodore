@@ -8,6 +8,8 @@ import helmet from 'helmet';
 import compression from 'compression';
 import { join } from 'path';
 
+import renderApp from './lib/renderApp';
+
 import config from './config';
 import routes from './routes/index';
 
@@ -22,7 +24,8 @@ app.set('views', join(config.root, 'views'));
 app.set('view engine', 'jade');
 app.set('appPath', join(config.root, 'dist'));
 app.set('publicPath', join(config.root, 'public'));
-winston.log('silly', 'Set views, view engine, appPath, publicPath');
+app.set('rederedApp', renderApp());
+winston.log('silly', 'Set views, view engine, appPath, publicPath, renderedApp');
 
 app.use(compression());
 app.use(helmet());
