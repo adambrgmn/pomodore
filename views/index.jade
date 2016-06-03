@@ -21,6 +21,9 @@ html.no-js(lang="en")
       .container(id=options.appMountId)!= app
 
     script!= files.manifest
+    script(src=cdn.react)
+    script(src=cdn.reactDOM)
+    script(src=cdn.immutable)
     script(src=files.vendor)
     script(src=files.bundle)
     include ./includes/analytics
