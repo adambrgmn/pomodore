@@ -1,15 +1,15 @@
-import express from 'express';
-import favicon from 'serve-favicon';
-import morgan from 'morgan';
-import winston from 'winston';
-import cookieParser from 'cookie-parser';
-import bodyParser from 'body-parser';
-import helmet from 'helmet';
-import compression from 'compression';
-import { join } from 'path';
+const express = require('express');
+const favicon = require('serve-favicon');
+const morgan = require('morgan');
+const winston = require('winston');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const helmet = require('helmet');
+const compression = require('compression');
+const path = require('path');
 
-import config from './config';
-import routes from './routes/index';
+const config = require('./config');
+const routes = require('./routes/index');
 
 winston.remove(winston.transports.Console);
 winston.add(winston.transports.Console, { colorize: true });
@@ -18,15 +18,15 @@ winston.level = process.env.LOG_LEVEL || 'silly';
 const app = express();
 winston.log('silly', 'Instantiated Express app');
 
-app.set('views', join(config.root, 'views'));
+app.set('views', path.join(config.root, 'views'));
 app.set('view engine', 'jade');
-app.set('appPath', join(config.root, 'dist'));
-app.set('publicPath', join(config.root, 'public'));
+app.set('appPath', path.join(config.root, 'dist'));
+app.set('publicPath', path.join(config.root, 'public'));
 winston.log('silly', 'Set views, view engine, appPath, publicPath');
 
 app.use(compression());
 app.use(helmet());
-app.use(favicon(join(app.get('publicPath'), 'icons', 'favicon.ico')));
+app.use(favicon(path.join(app.get('publicPath'), 'icons', 'favicon.ico')));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -67,4 +67,4 @@ app.use((err, req, res, next) => {
   winston.log('error', 'Production Errorhandler', err);
 });
 
-export default app;
+module.exports = app;

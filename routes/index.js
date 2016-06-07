@@ -1,11 +1,11 @@
-import winston from 'winston';
-import { merge } from 'lodash';
-import findFiles from '../lib/findFiles';
-import getManifestContent from '../lib/getManifestContent';
-import setDefaults from '../lib/setDefaults';
-import renderApp from '../lib/renderApp';
+const winston = require('winston');
+const _ = require('lodash');
+const findFiles = require('../lib/findFiles');
+const getManifestContent = require('../lib/getManifestContent');
+const setDefaults = require('../lib/setDefaults');
+const renderApp = require('../lib/renderApp');
 
-export default function routes(app) {
+function routes(app) {
   const options = {};
   let error;
   findFiles('dist/**/*.{js,css}', {})
@@ -14,7 +14,7 @@ export default function routes(app) {
     .then(renderApp)
     .then((opt) => {
       winston.log('silly', 'Prepared app');
-      return merge(options, opt);
+      return _.merge(options, opt);
     })
     .catch((err) => {
       error = err;
@@ -25,3 +25,5 @@ export default function routes(app) {
     return res.render('index', options);
   });
 }
+
+module.exports = routes;

@@ -1,8 +1,8 @@
 const debug = require('debug')('pomodore');
 
-import app from '../server';
-import http from 'http';
-import winston from 'winston';
+const app = require('../server');
+const http = require('http');
+const winston = require('winston');
 
 function normalizePort(val) {
   const port = parseInt(val, 10);
