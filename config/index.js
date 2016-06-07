@@ -1,10 +1,10 @@
-import { normalize } from 'path';
-import { merge } from 'lodash';
-import pkg from '../package.json';
+const path = require('path');
+const _ = require('lodash');
+const pkg = require('../package.json');
 
 const common = {
   env: process.env.NODE_ENV || 'development',
-  root: normalize(`${__dirname}/..`),
+  root: path.normalize(`${__dirname}/..`),
   port: process.env.PORT || 3000,
   logLevel: process.env.LOG_LEVEL || 'silly',
   app: {
@@ -29,6 +29,6 @@ const env = {
   development: {},
 };
 
-const config = merge(common, env[common.env]);
+const config = _.merge(common, env[common.env]);
 
-export default config;
+module.exports = config;
