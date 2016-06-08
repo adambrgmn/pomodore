@@ -27,12 +27,11 @@ app.set('publicPath', path.join(config.root, 'public'));
 winston.log('silly', 'Set views, view engine, appPath, publicPath');
 
 if (devMode) {
-  winston.log('info', 'In development mode');
   app.use(compression());
   app.use(helmet());
 }
 
-app.use(favicon(path.join(app.get('publicPath'), 'icons', 'favicon.ico')));
+app.use(favicon(path.join(app.get('publicPath'), 'favicon.ico')));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -43,7 +42,7 @@ if (devMode) {
   app.use(express.static(app.get('publicPath')));
 }
 
-winston.log('silly', 'Setup middleware');
+winston.log('silly', `Middleware setup in ${config.env} mode`);
 
 routes(app);
 
