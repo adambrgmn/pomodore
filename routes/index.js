@@ -2,21 +2,22 @@ const winston = require('winston');
 const _ = require('lodash');
 const findFiles = require('../lib/findFiles');
 const getManifestContent = require('../lib/getManifestContent');
-const setDefaults = require('../lib/setDefaults');
 const renderApp = require('../lib/renderApp');
+const setDefaults = require('../lib/setDefaults');
 
 function routes(app) {
   const options = {};
   let error;
   findFiles('dist/**/*.{js,css}', {})
     .then(getManifestContent)
-    .then(setDefaults)
     .then(renderApp)
+    .then(setDefaults)
     .then((opt) => {
       winston.log('silly', 'Prepared app');
       return _.merge(options, opt);
     })
     .catch((err) => {
+      winston.log('error', 'Error preparing app', err);
       error = err;
     });
 
