@@ -1,5 +1,3 @@
-const debug = require('debug')('pomodore');
-
 const app = require('../server');
 const http = require('http');
 const winston = require('winston');
@@ -45,6 +43,5 @@ server.on('error', (error) => {
 server.on('listening', () => {
   const addr = server.address();
   const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
-  winston.log('info', `Server created and listening to port ${port} in ${app.get('env')} mode`);
-  debug(`Listening on ${bind}`);
+  winston.log('info', `Server created and listening to port ${bind} in ${app.get('env')} mode`);
 });

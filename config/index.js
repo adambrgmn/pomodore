@@ -4,9 +4,9 @@ const pkg = require('../package.json');
 
 const common = {
   env: process.env.NODE_ENV || 'development',
+  logLevel: process.env.LOG_LEVEL || 'silly',
   root: path.normalize(`${__dirname}/..`),
   port: process.env.PORT || 3000,
-  logLevel: process.env.LOG_LEVEL || 'silly',
   app: {
     title: `${pkg.name.charAt(0).toUpperCase()}${pkg.name.slice(1)}`,
     subtitle: pkg.description,

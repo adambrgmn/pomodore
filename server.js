@@ -13,30 +13,40 @@ const routes = require('./routes/index');
 
 const devMode = config.env === 'development';
 
+// Setup Winston to log everything necessary
 winston.remove(winston.transports.Console);
 winston.add(winston.transports.Console, { colorize: true });
-winston.level = process.env.LOG_LEVEL || 'silly';
+winston.stream = { write: (message) => winston.info(message) };
+winston.level = config.logLevel;
 
+
+// Instantiate Express app
 const app = express();
 winston.log('silly', 'Instantiated Express app');
 
+// Set views and paths to public directories
 app.set('views', path.join(config.root, 'views'));
 app.set('view engine', 'jade');
 app.set('appPath', path.join(config.root, 'dist'));
 app.set('publicPath', path.join(config.root, 'public'));
 winston.log('silly', 'Set views, view engine, appPath, publicPath');
 
+// Set up compression in development mode
+// This is solved by Nginx in production
 if (devMode) {
   app.use(compression());
-  app.use(helmet());
 }
 
+// Setup necessary middlewares
+app.use(helmet());
 app.use(favicon(path.join(app.get('publicPath'), 'favicon.ico')));
-app.use(morgan('dev'));
+app.use(morgan('dev', { stream: winston.stream }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+// Serve static files in development mode
+// This is solved by Nginx in production
 if (devMode) {
   app.use(express.static(app.get('appPath')));
   app.use(express.static(app.get('publicPath')));
@@ -44,8 +54,10 @@ if (devMode) {
 
 winston.log('silly', `Middleware setup in ${config.env} mode`);
 
+// Use routes
 routes(app);
 
+// Error handlers
 app.use((req, res, next) => {
   const err = new Error('Not found');
   err.status = 404;
