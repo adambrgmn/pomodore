@@ -11,6 +11,8 @@ const path = require('path');
 const config = require('./config');
 const routes = require('./routes/index');
 
+const devMode = config.env === 'development';
+
 winston.remove(winston.transports.Console);
 winston.add(winston.transports.Console, { colorize: true });
 winston.level = process.env.LOG_LEVEL || 'silly';
@@ -24,15 +26,23 @@ app.set('appPath', path.join(config.root, 'dist'));
 app.set('publicPath', path.join(config.root, 'public'));
 winston.log('silly', 'Set views, view engine, appPath, publicPath');
 
-app.use(compression());
-app.use(helmet());
+if (devMode) {
+  winston.log('info', 'In development mode');
+  app.use(compression());
+  app.use(helmet());
+}
+
 app.use(favicon(path.join(app.get('publicPath'), 'icons', 'favicon.ico')));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(app.get('appPath')));
-app.use(express.static(app.get('publicPath')));
+
+if (devMode) {
+  app.use(express.static(app.get('appPath')));
+  app.use(express.static(app.get('publicPath')));
+}
+
 winston.log('silly', 'Setup middleware');
 
 routes(app);
