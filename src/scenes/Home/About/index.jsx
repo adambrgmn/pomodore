@@ -6,7 +6,7 @@ export function AboutContainer(props) {
   return <ReactTransitionGroup component="div">{props.children}</ReactTransitionGroup>;
 }
 
-AboutContainer.PropTypes = {
+AboutContainer.propTypes = {
   children: React.PropTypes.arrayOf(React.PropTypes.element),
 };
 
